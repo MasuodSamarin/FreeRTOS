@@ -47,7 +47,7 @@
 not the MCLK. */
 #define portACLK_FREQUENCY_HZ			( ( TickType_t ) 32768 )
 #define portINITIAL_CRITICAL_NESTING	( ( uint16_t ) 10 )
-#define portFLAGS_INT_ENABLED	( ( StackType_t ) 0x08 )
+#define portFLAGS_INT_ENABLED	        ( ( StackType_t ) 0x08 )
 
 /* We require the address of the pxCurrentTCB variable, but don't want to know
 any details of its type. */
@@ -226,60 +226,17 @@ void vPortEndScheduler( void )
 }
 /*-----------------------------------------------------------*/
 
-/*
- * Manual context switch called by portYIELD or taskYIELD.  
- *
- * The first thing we do is save the registers so we can use a naked attribute.
- */
-void vPortYield( void ) __attribute__ ( ( naked ) );
-void vPortYield( void )
-{
-	/* We want the stack of the task being saved to look exactly as if the task
-	was saved during a pre-emptive RTOS tick ISR.  Before calling an ISR the 
-	msp430 places the status register onto the stack.  As this is a function 
-	call and not an ISR we have to do this manually. */
-	asm volatile ( "push	r2" );
-	_DINT();
-
-	/* Save the context of the current task. */
-	portSAVE_CONTEXT();
-
-	/* Switch to the highest priority task that is ready to run. */
-	vTaskSwitchContext();
-
-	/* Restore the context of the new task. */
-	portRESTORE_CONTEXT();
-}
-/*-----------------------------------------------------------*/
 
 /*
  * Hardware initialisation to generate the RTOS tick.  This uses timer 0
  * but could alternatively use the watchdog timer or timer 1. 
  */
-static void prvSetupTimerInterrupt( void )
-{
-	/* Ensure the timer is stopped. */
-	TACTL = 0;
 
-	/* Run the timer of the ACLK. */
-	TACTL = TASSEL_1;
-
-	/* Clear everything to start with. */
-	TACTL |= TACLR;
-
-	/* Set the compare match value according to the tick rate we want. */
-	TACCR0 = portACLK_FREQUENCY_HZ / configTICK_RATE_HZ;
-
-	/* Enable the interrupts. */
-	TACCTL0 = CCIE;
-
-	/* Start up clean. */
-	TACTL |= TACLR;
-
-	/* Up mode. */
-	TACTL |= MC_1;
-}
-/*-----------------------------------------------------------*/
+#define TIMER_CON       JL_TIMER1->CON
+#define TIMER_CNT       JL_TIMER1->CNT
+#define TIMER_PRD       JL_TIMER1->PRD
+#define TIMER_VETOR     IRQ_TIME1_IDX
+#define TIMER_UNIT_MS   APP_TICKS_UNIT
 
 /* 
  * The interrupt service routine used depends on whether the pre-emptive
@@ -293,8 +250,8 @@ static void prvSetupTimerInterrupt( void )
 	 * the context is saved at the start of vPortYieldFromTick().  The tick
 	 * count is incremented after the context is saved.
 	 */
-	interrupt (TIMERA0_VECTOR) prvTickISR( void ) __attribute__ ( ( naked ) );
-	interrupt (TIMERA0_VECTOR) prvTickISR( void )
+	void prvTickISR( void ) __attribute__ ( ( naked ) );
+	void prvTickISR( void )
 	{
 		/* Save the context of the interrupted task. */
 		portSAVE_CONTEXT();
@@ -309,6 +266,7 @@ static void prvSetupTimerInterrupt( void )
 		/* Restore the context of the new task. */
 		portRESTORE_CONTEXT();
 	}
+    IRQ_REGISTER(TIMER_VETOR, prvTickISR);
 
 #else
 
@@ -317,12 +275,26 @@ static void prvSetupTimerInterrupt( void )
 	 * tick count.  We don't need to switch context, this can only be done by
 	 * manual calls to taskYIELD();
 	 */
-	interrupt (TIMERA0_VECTOR) prvTickISR( void );
-	interrupt (TIMERA0_VECTOR) prvTickISR( void )
+	void prvTickISR( void );
+	void prvTickISR( void )
 	{
 		xTaskIncrementTick();
 	}
+    IRQ_REGISTER(TIMER_VETOR, prvTickISR);
 #endif
+
+static void prvSetupTimerInterrupt( void )
+{
+    IRQ_REQUEST(TIMER_VETOR, prvTickISR, 1);
+
+    TIMER_CNT = 0;
+    TIMER_PRD = portACLK_FREQUENCY_HZ / configTICK_RATE_HZ;
+
+    scale = 0;
+    TIMER_CON = (scale << 4) | BIT(0) | BIT(3);
+}
+/*-----------------------------------------------------------*/
+
 
 
 	

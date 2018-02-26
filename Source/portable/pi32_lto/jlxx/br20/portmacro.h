@@ -65,8 +65,8 @@ typedef unsigned short UBaseType_t;
 /*-----------------------------------------------------------*/
 
 /* Interrupt control macros. */
-#define portDISABLE_INTERRUPTS()	asm volatile ( "DINT" ); asm volatile ( "NOP" )
-#define portENABLE_INTERRUPTS()		asm volatile ( "EINT" ); asm volatile ( "NOP" )
+#define portDISABLE_INTERRUPTS()	asm volatile ( "cli" ); asm volatile ( "NOP" )
+#define portENABLE_INTERRUPTS()		asm volatile ( "sti" ); asm volatile ( "NOP" )
 /*-----------------------------------------------------------*/
 
 /* Critical section control macros. */
@@ -110,9 +110,24 @@ extern void vPortYield( void ) __attribute__ ( ( naked ) );
 /*-----------------------------------------------------------*/
 
 /* Hardwware specifics. */
-#define portBYTE_ALIGNMENT			2
+#define portBYTE_ALIGNMENT			4
 #define portSTACK_GROWTH			( -1 )
 #define portTICK_PERIOD_MS			( ( TickType_t ) 1000 / configTICK_RATE_HZ )
+
+
+#define IRQ_TIME0_IDX      2
+
+void irq_common_handler(u32 idx);
+
+#define IRQ_REGISTER(idx, hdl) \
+    SET(interrupt("")) void irq_##hdl() \
+    {\
+        hdl();\
+        irq_common_handler(idx);\
+    }
+
+#define IRQ_REQUEST(idx, hdl, prio) \
+    irq_handler_register(idx, irq_##hdl, prio)
 /*-----------------------------------------------------------*/
 
 /* Task function macros as described on the FreeRTOS.org WEB site. */
