@@ -114,20 +114,6 @@ extern void vPortYield( void ) __attribute__ ( ( naked ) );
 #define portSTACK_GROWTH			( -1 )
 #define portTICK_PERIOD_MS			( ( TickType_t ) 1000 / configTICK_RATE_HZ )
 
-
-#define IRQ_TIME0_IDX      2
-
-void irq_common_handler(u32 idx);
-
-#define IRQ_REGISTER(idx, hdl) \
-    SET(interrupt("")) void irq_##hdl() \
-    {\
-        hdl();\
-        irq_common_handler(idx);\
-    }
-
-#define IRQ_REQUEST(idx, hdl, prio) \
-    irq_handler_register(idx, irq_##hdl, prio)
 /*-----------------------------------------------------------*/
 
 /* Task function macros as described on the FreeRTOS.org WEB site. */

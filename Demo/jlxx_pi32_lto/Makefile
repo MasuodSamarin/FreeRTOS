@@ -24,7 +24,7 @@ export SUFFIX=
 export V=@
 
 #配置下载目标SoC(br16/br17/br20)
-export SoC=br21
+export SoC=br20
 
 #配置编译芯片平台
 

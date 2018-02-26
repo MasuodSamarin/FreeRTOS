@@ -26,7 +26,7 @@
  */
 
 /*
-	Changes from V2.5.2
+	JL Start from V1.0.0
 		
 	+ usCriticalNesting now has a volatile qualifier.
 */
@@ -231,12 +231,13 @@ void vPortEndScheduler( void )
  * Hardware initialisation to generate the RTOS tick.  This uses timer 0
  * but could alternatively use the watchdog timer or timer 1. 
  */
+#include "irq_interface.h"
+#include "interrupt.h"
 
 #define TIMER_CON       JL_TIMER1->CON
 #define TIMER_CNT       JL_TIMER1->CNT
 #define TIMER_PRD       JL_TIMER1->PRD
 #define TIMER_VETOR     IRQ_TIME1_IDX
-#define TIMER_UNIT_MS   APP_TICKS_UNIT
 
 /* 
  * The interrupt service routine used depends on whether the pre-emptive
