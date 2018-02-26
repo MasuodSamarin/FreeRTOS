@@ -1,0 +1,99 @@
+
+# --------------Basic Setting-----------------------
+#  
+#配置下载CPU架构(bfin/pi32/pi32_lto)
+export ARCH = pi32_lto
+
+#配置下载目标平台(br16/br17/br20)
+export RELEASE=br20
+
+#配置项目文件指向(br16/br17/br20)
+export PLATFORM=br20
+
+#配置是否FPGA 验证平台(FPGA/CHIP)
+export TYPE=CHIP
+
+#配置下载匹配(br17_sdk/br20_sdk)
+export NICKNAME=br20_sdk
+
+# 配置BLE 蓝牙模式(CONTROLLER_MODE/FULL_MODE)
+export LE_MODE=CONTROLLER_MODE
+
+#配置下载介质(otp/flash)
+export CODE_SPACE=otp
+#配置OTP调试(y/n)
+export DEBUG=y
+#  
+# --------------Project path Setting-----------------------
+#  
+export POST_BUILD_DIR= post_build$(SLASH)$(RELEASE)$(SLASH)$(CODE_SPACE)
+ifeq ($(CODE_SPACE), flash)
+export DIR_OUTPUT= $(POST_BUILD_DIR)
+endif
+
+ifeq ($(CODE_SPACE), otp)
+ifeq ($(DEBUG), y)
+export DIR_OUTPUT= $(POST_BUILD_DIR)$(SLASH)debug
+else
+export DIR_OUTPUT= $(POST_BUILD_DIR)$(SLASH)release
+endif
+endif
+
+export LIB_DIR = output
+
+export MAKE_RULE = $(abspath .)/rule.mk
+
+export DEPENDS = $(abspath .)/depend.bat
+
+# - output file
+export EXES= sdk
+OUTPUT_EXES= $(addprefix $(DIR_OUTPUT)$(SLASH), $(EXES))
+export OUTPUT_EXES:= $(addsuffix .exe, $(OUTPUT_EXES))
+
+BUILD_LD=sdk.ld
+BUILD_MAP=sdk.map
+
+export LINKER = \
+-T$(addprefix $(POST_BUILD_DIR)$(SLASH), $(BUILD_LD).out) \
+-M=$(addprefix $(POST_BUILD_DIR)$(SLASH), $(BUILD_MAP)) 
+
+export MAKE_RULE = $(abspath .)/rule.mk
+
+export LIBS_PATH=libs
+
+export INCLUDE_LIB_PATH=..$(SLASH)..$(SLASH)include_lib
+
+#default TARGET
+export TARGET=apps
+
+export MAKEDIR = $(shell find $(LIBS_PATH) -maxdepth 1 -type d)
+
+ifeq ($(HOST_OS), windows) 
+CPP=C:\JL\dv10\\bin\dv10-elf-cpp.exe
+endif
+
+ifeq ($(HOST_OS), linux) 
+CPP=cpp
+endif
+#  
+# --------------Architecture & Complier Setting-----------------------
+#  
+-include tools$(SLASH)compiler$(SLASH)Makefile.$(ARCH)
+
+LINKER_SCRIPT_INPUT = \
+apps$(SLASH)post_build$(SLASH)$(RELEASE)$(SLASH)$(CODE_SPACE)$(SLASH)$(BUILD_LD)
+
+ENTRY_LIST=post_build$(SLASH)$(RELEASE)$(SLASH)libs_stubs.ld
+
+pre_make:
+	@echo "Making... Soc : br20 $(CODE_SPACE)"
+ifeq ($(CODE_SPACE), flash)
+	$(V) $(CPP) -P -DENTRY_LIST=$(ENTRY_LIST) $(LINKER_SCRIPT_INPUT) $(LINKER_SCRIPT_INPUT).out
+endif
+ifeq ($(CODE_SPACE), otp)
+ifeq ($(DEBUG), y)
+	$(V) $(CPP) -P -DCODE_START_ADDR=0x1000000 -DCODE_LENGTH=16M -DENTRY_LIST=$(ENTRY_LIST) $(LINKER_SCRIPT_INPUT) $(LINKER_SCRIPT_INPUT).out
+else 
+	$(V) $(CPP) -P -DCODE_START_ADDR=0x1ff0200 -DCODE_LENGTH=64K-512 -DENTRY_LIST=$(ENTRY_LIST) $(LINKER_SCRIPT_INPUT) $(LINKER_SCRIPT_INPUT).out
+endif
+endif

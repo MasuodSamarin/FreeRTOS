@@ -1,0 +1,66 @@
+#*************************************************************************
+#
+#						Linux
+#
+#*************************************************************************
+ifeq ($(HOST_OS), linux) 
+
+# --------------tools path-----------------------
+export JL_TOOLS=/opt/pi32/test
+
+export CC = $(JL_TOOLS)/bin/pi32-clang
+export LD = $(JL_TOOLS)/bin/lto-wrapper
+export AR = lto-ar
+ 
+export LIB_DIR = output$(SLASH)
+
+export MAKE_RULE = $(abspath .)/rule.mk
+
+export OBJCOPY=$(JL_TOOLS)/bin/pi32-objcopy
+export OBJDUMP=$(JL_TOOLS)/bin/pi32-objdump
+# --------------complier args-----------------------
+export AR_ARGS = \
+-r -s 
+
+export LD_ARGS = \
+-L$(JL_TOOLS)/include/libc \
+--plugin $(JL_TOOLS)/bin/LLVMgold.so \
+--plugin-opt=-pi32-memreg-opt \
+--plugin-opt=-pi32-mem-offset-adj-opt \
+--plugin-opt=-pi32-const-spill \
+--plugin-opt=-pi32-enable-jz \
+--plugin-opt=-pi32-tailcall-opt \
+--plugin-opt=-inline-threshold=5 \
+--plugin-opt=-pi32-enable-itblock=1 \
+--plugin-opt=save-temps \
+-o \
+ 
+
+export CC_ARGS = \
+-target pi32 \
+-integrated-as \
+-fno-builtin \
+-c -g \
+-nostrictpi32 \
+-Oz \
+-flto \
+-fms-extensions \
+ 
+# --------------include path-----------------------
+export includes = \
+-I$(JL_TOOLS)/include  \
+-I$(JL_TOOLS)/include/libc  \
+
+ 
+export SYS_LIBS = \
+$(JL_TOOLS)/lib/libc.a  \
+$(JL_TOOLS)/lib/libcompiler-rt.a \
+-Ttools/$(CHIPID)/ram.ld \
+-M=tools/$(CHIPID)/map.txt \
+
+export LIBS_PATH=libs
+
+
+endif #($(HOST_OS), linux)
+
+ 

@@ -1,0 +1,64 @@
+#  
+# --------------Basic Setting-----------------------
+#  
+#配置下载CPU架构(bfin/pi32/pi32_lto)
+export ARCH = pi32_lto
+
+#配置下载目标平台(br16/br17/br20/br21)
+export RELEASE=br21
+
+#配置项目文件指向(br16/br17/br20/br21)
+export PLATFORM=br21
+
+#配置是否FPGA 验证平台(FPGA/CHIP)
+export TYPE=CHIP
+
+#配置下载匹配(br17_sdk/br20_sdk/br21_sdk)
+export NICKNAME=br21_sdk
+
+# 配置BLE 蓝牙模式(CONTROLLER_MODE/FULL_MODE)
+export LE_MODE=CONTROLLER_MODE
+
+#  
+# --------------Project path Setting-----------------------
+#  
+export DIR_OUTPUT= post_build$(SLASH)$(RELEASE)
+
+export LIB_DIR = output
+
+export MAKE_RULE = $(abspath .)/rule.mk
+
+export DEPENDS = $(abspath .)/depend.bat
+
+# - output file
+export EXES= sdk
+OUTPUT_EXES= $(addprefix $(DIR_OUTPUT)$(SLASH), $(EXES))
+export OUTPUT_EXES:= $(addsuffix .exe, $(OUTPUT_EXES))
+
+BUILD_LD=sdk.ld
+BUILD_MAP=sdk.map
+
+export LINKER = \
+-T$(addprefix $(DIR_OUTPUT)$(SLASH), $(BUILD_LD)) \
+-M=$(addprefix $(DIR_OUTPUT)$(SLASH), $(BUILD_MAP)) \
+
+
+export MAKE_RULE = $(abspath .)/rule.mk
+
+export LIBS_PATH=libs
+
+export INCLUDE_LIB_PATH=..$(SLASH)..$(SLASH)include_lib
+
+#default TARGET
+export TARGET=apps
+
+
+export MAKEDIR = $(shell find $(LIBS_PATH) -maxdepth 1 -type d)
+
+#  
+# --------------Architecture & Complier Setting-----------------------
+#  
+-include tools$(SLASH)compiler$(SLASH)Makefile.$(ARCH)
+
+pre_make:
+	@echo "Making... Soc : br21"
