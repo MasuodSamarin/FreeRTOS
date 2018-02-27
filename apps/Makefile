@@ -16,14 +16,14 @@ INCLUDES = \
 -I../include_lib/cpu \
 -I../include_lib/cpu/$(RELEASE) \
 -I../include_lib/btstack \
--I../../../Source/include \
--I../../../Source/portable/pi32_lto/jlxx/$(RELEASE) \
--I../../Common/include \
+-Ifreertos/include \
+-Ifreertos/portable/pi32_lto/$(RELEASE) \
+-Ifreertos/Common/include \
 
 # Setup paths to source code	
-export SOURCE_PATH 	= ../../../Source
-export PORT_PATH 	= ../../../Source/portable/pi32_lto/jlxx/$(RELEASE)
-export DEMO_PATH 	= ../../Common/Minimal
+# export SOURCE_PATH 	= ../../../Source
+# export PORT_PATH 	= ../../../Source/portable/pi32_lto/jlxx/$(RELEASE)
+# export DEMO_PATH 	= ../../Common/Minimal
 
 # Add core code for FreeRTOS base
 
@@ -58,9 +58,9 @@ SRCS_C += \
 bt/dongle/usb_dongle.c
 
 else
-SRCS_C += \
-bt/bt_task.c \
-bt/examples/le_streamer.c \
+# SRCS_C += \
+# bt/bt_task.c \
+# bt/examples/le_streamer.c \
 # bt/examples/le_streamer_client.c \
 # bt/examples/user.c \
 bt/examples/hogp_server.c \

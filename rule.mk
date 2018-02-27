@@ -25,16 +25,8 @@ ifeq ($(HOST_OS), windows)
 .PHONY: all archive clean dry_run
  
 all: $(OBJS_LS) $(OBJS_BS) $(OBJS_C) 
-	$(V) $(LD) $(LD_ARGS) $(OUTPUT_EXES) $(OBJS_C) $(OBJS_LS) $(OBJS_BS) $(LIBS) $(SYS_LIBS) $(LINKER) --output-version-info $(DIR_OUTPUT)/ver.bin
+	$(V) $(LD) $(LD_ARGS) $(OUTPUT_EXES) $(OBJS_C) $(OBJS_LS) $(OBJS_BS) $(LIBS) $(SYS_LIBS) $(LINKER) 
 	@$(DIR_OUTPUT)\download.bat $(EXES) $(OBJDUMP) $(OBJCOPY) $(BANKZIP)
-
-debug:
-	@echo "--LS"
-	@echo $(OBJS_LS) 
-	@echo "--BS"
-	@echo $(OBJS_BS) 
-	@echo "--C"
-	@echo $(OBJS_C) 
 
 archive:$(OBJS_LS) $(OBJS_BS) $(OBJS_C) 
 	@if exist $(LIB_DIR) (rd /s/q $(LIB_DIR))

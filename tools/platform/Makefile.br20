@@ -21,6 +21,7 @@ export LE_MODE=FULL_MODE
 
 #配置下载介质(otp/flash)
 export CODE_SPACE=otp
+
 #配置OTP调试(y/n)
 export DEBUG=y
 #  
