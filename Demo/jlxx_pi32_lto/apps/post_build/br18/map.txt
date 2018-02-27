@@ -1,0 +1,579 @@
+Archive member included to satisfy reference by file (symbol)
+
+../include_lib/common_lib.a(init.o)
+                              /home/bingquan/svn/br20/trunk/sdk/apps/main/board.o (symbol from plugin) (system_init_call)
+../include_lib/common_lib.a(vmalloc.o)
+                              /home/bingquan/svn/br20/trunk/sdk/apps/cpu/br18/sys_init.o (symbol from plugin) (vmm_init)
+../include_lib/common_lib.a(mem_heap.o)
+                              /home/bingquan/svn/br20/trunk/sdk/apps/cpu/br18/timer_hw.o (symbol from plugin) (free)
+../include_lib/common_lib.a(printf-stdarg.o)
+                              /home/bingquan/svn/br20/trunk/sdk/apps/cpu/br18/debug_init.o (symbol from plugin) (printf)
+../include_lib/common_lib.a(sys_timer.o)
+                              /home/bingquan/svn/br20/trunk/sdk/apps/cpu/br18/debug_init.o (symbol from plugin) (sys_timer_register)
+../include_lib/common_lib.a(thread.o)
+                              /home/bingquan/svn/br20/trunk/sdk/apps/bt/bt_task.o (symbol from plugin) (thread_init)
+../include_lib/common_lib.a(pmalloc.o)
+                              vmalloc.o (symbol from plugin) (pmalloc_init)
+../include_lib/common_lib.a(sbrk.o)
+                              mem_heap.o (symbol from plugin) (sbrk)
+../include_lib/cpu_lib_br18.a(clock_api.o)
+                              /home/bingquan/svn/br20/trunk/sdk/apps/cpu/br18/adc_hw.o (symbol from plugin) (clock_get_lsb_freq)
+../include_lib/cpu_lib_br18.a(power_api.o)
+                              /home/bingquan/svn/br20/trunk/sdk/apps/common/power.o (symbol from plugin) (poweroff_recover)
+../include_lib/cpu_lib_br18.a(interrupt.o)
+                              /home/bingquan/svn/br20/trunk/sdk/apps/cpu/br18/sys_init.o (symbol from plugin) (irq_init)
+../include_lib/cpu_lib_br18.a(irq_hw.o)
+                              interrupt.o (symbol from plugin) (__irq_drv)
+../include_lib/cpu_lib_br18.a(clock_hw.o)
+                              clock_api.o (symbol from plugin) (__clock_drv)
+../include_lib/cpu_lib_br18.a(debug_hw.o)
+                              /home/bingquan/svn/br20/trunk/sdk/apps/cpu/br18/debug_init.o (symbol from plugin) (__debug_drv)
+../include_lib/cpu_lib_br18.a(irq_asm.o)
+                              /home/bingquan/svn/br20/trunk/sdk/apps/cpu/br18/sys_init.o (symbol from plugin) (CPU_INT_DIS)
+../include_lib/rtos_lib_br18.a(os_time.o)
+                              /home/bingquan/svn/br20/trunk/sdk/apps/bt/examples/le_streamer.o (symbol from plugin) (OSTimeGet)
+../include_lib/rtos_lib_br18.a(os_api.o)
+                              /home/bingquan/svn/br20/trunk/sdk/apps/common/input_task.o (symbol from plugin) (os_task_create)
+../include_lib/rtos_lib_br18.a(os_core.o)
+                              /home/bingquan/svn/br20/trunk/sdk/apps/cpu/br18/sys_init.o (symbol from plugin) (OSInit)
+../include_lib/rtos_lib_br18.a(os_mutex.o)
+                              mem_heap.o (symbol from plugin) (OSMutexCreate)
+../include_lib/rtos_lib_br18.a(os_task.o)
+                              os_time.o (symbol from plugin) (OSGetTaskTcb)
+../include_lib/rtos_lib_br18.a(os_sem.o)
+                              /home/bingquan/svn/br20/trunk/sdk/apps/bt/bt_task.o (symbol from plugin) (OSSemCreate)
+../include_lib/rtos_lib_br18.a(os_q.o)
+                              /home/bingquan/svn/br20/trunk/sdk/apps/common/key.o (symbol from plugin) (OSQCreate)
+../include_lib/rtos_lib_br18.a(os_cpu_c.o)
+                              os_task.o (symbol from plugin) (OSTaskStkInit)
+../include_lib/rtos_lib_br18.a(os_cpu.o)
+                              os_core.o (symbol from plugin) (OSCtxSw)
+../include_lib/btstack_lib.a(fpga_analog.o)
+                              /home/bingquan/svn/br20/trunk/sdk/apps/bt/bt_task.o (symbol from plugin) (bt_osc_internal_cfg)
+../include_lib/btstack_lib.a(utils.o)
+                              /home/bingquan/svn/br20/trunk/sdk/apps/bt/examples/le_streamer.o (symbol from plugin) (little_endian_read_16)
+../include_lib/btstack_lib.a(btstack_memory.o)
+                              /home/bingquan/svn/br20/trunk/sdk/apps/bt/examples/le_streamer.o (symbol from plugin) (le_btstack_memory_init)
+../include_lib/btstack_lib.a(RF.o)
+                              fpga_analog.o (symbol from plugin) (rf)
+../include_lib/btstack_lib.a(bt_power_driver.o)
+                              power_api.o (symbol from plugin) (__power_is_poweroff)
+../include_lib/btstack_lib.a(bt_poweroff_reboot.o)
+                              bt_power_driver.o (symbol from plugin) (poweroff_probe)
+../include_lib/btstack_lib.a(analog_ble.o)
+                              RF.o (symbol from plugin) (ble_mdm_init)
+../include_lib/btstack_lib.a(ble_hci.o)
+                              /home/bingquan/svn/br20/trunk/sdk/apps/bt/bt_task.o (symbol from plugin) (le_controller_init)
+../include_lib/btstack_lib.a(link_layer.o)
+                              ble_hci.o (symbol from plugin) (aes128_start)
+../include_lib/btstack_lib.a(le_device_db_memory.o)
+                              /home/bingquan/svn/br20/trunk/sdk/apps/bt/examples/le_streamer.o (symbol from plugin) (le_device_db_init)
+../include_lib/btstack_lib.a(hci.o)
+                              /home/bingquan/svn/br20/trunk/sdk/apps/bt/examples/le_streamer.o (symbol from plugin) (hci_add_event_handler)
+../include_lib/btstack_lib.a(h4_transport.o)
+                              /home/bingquan/svn/br20/trunk/sdk/apps/bt/examples/le_streamer.o (symbol from plugin) (ble_hci_transport_h4_instance)
+../include_lib/btstack_lib.a(l2cap.o)
+                              /home/bingquan/svn/br20/trunk/sdk/apps/bt/examples/le_streamer.o (symbol from plugin) (le_l2cap_init)
+../include_lib/btstack_lib.a(l2cap_signaling.o)
+                              l2cap.o (symbol from plugin) (l2cap_create_signaling_le)
+../include_lib/btstack_lib.a(hci_cmds.o)
+                              hci.o (symbol from plugin) (le_hci_create_cmd_internal)
+../include_lib/btstack_lib.a(att_server.o)
+                              /home/bingquan/svn/br20/trunk/sdk/apps/bt/examples/le_streamer.o (symbol from plugin) (att_server_init)
+../include_lib/btstack_lib.a(sm.o)
+                              att_server.o (symbol from plugin) (sm_cmac_start)
+../include_lib/btstack_lib.a(reboot.o)
+                              bt_poweroff_reboot.o (symbol from plugin) (_reboot_start)
+../include_lib/btstack_lib.a(bt_memory.o)
+                              ble_hci.o (symbol from plugin) (btstack_nv_memory_apply)
+../include_lib/btstack_lib.a(memory_pool.o)
+                              btstack_memory.o (symbol from plugin) (memory_pool_create)
+../include_lib/btstack_lib.a(RF_ble.o)
+                              link_layer.o (symbol from plugin) (__ble_ops)
+../include_lib/btstack_lib.a(att.o)
+                              att_server.o (symbol from plugin) (att_set_db)
+../include_lib/btstack_lib.a(att_dispatch.o)
+                              att_server.o (symbol from plugin) (att_dispatch_register_server)
+../include_lib/br16_ccm_aes.a(aes.o)
+                              ble_hci.o (symbol from plugin) (aes128_start_dec)
+../include_lib/br16_ccm_aes.a(ccm_memory.o)
+                              RF_ble.o (symbol from plugin) (ccm_memory)
+../include_lib/common_lib.a(linked_list.o)
+                              hci.o (symbol from plugin) (linked_list_empty)
+../include_lib/common_lib.a(delay.o)
+                              clock_hw.o (symbol from plugin) (delay)
+../include_lib/common_lib.a(vsprintf.o)
+                              ble_hci.o (symbol from plugin) (__vsprintf_len)
+../include_lib/common_lib.a(lbuf.o)
+                              power_api.o (symbol from plugin) (lbuf_init)
+../include_lib/cpu_lib_br18.a(icache_hw.o)
+                              bt_poweroff_reboot.o (symbol from plugin) (__icache_drv)
+../include_lib/cpu_lib_br18.a(spi_hw.o)
+                              bt_poweroff_reboot.o (symbol from plugin) (__spi0_drv)
+/opt/pi32/test/lib/libc.a(lib_a-memcmp.o)
+                              utils.o (symbol from plugin) (memcmp)
+/opt/pi32/test/lib/libc.a(lib_a-memcpy.o)
+                              utils.o (symbol from plugin) (memcpy)
+/opt/pi32/test/lib/libc.a(lib_a-memset.o)
+                              /home/bingquan/svn/br20/trunk/sdk/apps/main/main_task.o (symbol from plugin) (memset)
+/opt/pi32/test/lib/libc.a(lib_a-strlen.o)
+                              hci_cmds.o (symbol from plugin) (strlen)
+
+Allocating common symbols
+Common symbol       size              file
+
+args                0x0               /home/bingquan/svn/br20/trunk/sdk/apps/cpu/br18/sys_init.o (symbol from plugin)
+le_event_buf        0x0               link_layer.o (symbol from plugin)
+OSLockNesting       0x0               os_core.o (symbol from plugin)
+OSRunning           0x0               os_core.o (symbol from plugin)
+OSIdleCtr           0x0               os_core.o (symbol from plugin)
+EVENT_MASK          0x0               ble_hci.o (symbol from plugin)
+hci_event_buf       0x0               ble_hci.o (symbol from plugin)
+bt15_pll_cap0       0x0               fpga_analog.o (symbol from plugin)
+DEVICE_ADDR_TYPE    0x0               link_layer.o (symbol from plugin)
+bt_pll_config_ram   0x0               fpga_analog.o (symbol from plugin)
+bt15_pll_cap1       0x0               fpga_analog.o (symbol from plugin)
+vmm_fat             0x0               vmalloc.o (symbol from plugin)
+idle_tcb            0x0               os_core.o (symbol from plugin)
+pm_mem_curren_pos_begin
+                    0x0               pmalloc.o (symbol from plugin)
+mem_fat             0x0               sbrk.o (symbol from plugin)
+hci_rx_buf          0x0               ble_hci.o (symbol from plugin)
+pm_mem_curren_pos   0x0               pmalloc.o (symbol from plugin)
+trim_info           0x0               fpga_analog.o (symbol from plugin)
+ERROR_CODES_LIST    0x0               bt_poweroff_reboot.o (symbol from plugin)
+HCI_EVENTS          0x0               bt_poweroff_reboot.o (symbol from plugin)
+hci_buf             0x0               ble_hci.o (symbol from plugin)
+OSTCBHighRdy        0x4               /home/bingquan/.my_tmp/lto-llvm-95aab4.o
+bt15_pll_cap2       0x0               fpga_analog.o (symbol from plugin)
+fsk_offset_dly      0x0               analog_ble.o (symbol from plugin)
+app_use_flash_cfg   0x0               /home/bingquan/svn/br20/trunk/sdk/apps/main/vm_task.o (symbol from plugin)
+OSRdyTbl            0x0               os_core.o (symbol from plugin)
+hci_cmd_ptr         0x0               ble_hci.o (symbol from plugin)
+g_master_reason     0x0               link_layer.o (symbol from plugin)
+pm_usd_map          0x0               pmalloc.o (symbol from plugin)
+offset_cnt          0x0               analog_ble.o (symbol from plugin)
+OSIntNesting        0x0               os_core.o (symbol from plugin)
+OSTCBCur            0x4               /home/bingquan/.my_tmp/lto-llvm-95aab4.o
+__rom_api           0x0               bt_poweroff_reboot.o (symbol from plugin)
+ll_error_code       0x0               link_layer.o (symbol from plugin)
+pkt_list_head       0x0               bt_poweroff_reboot.o (symbol from plugin)
+OSTime              0x0               os_core.o (symbol from plugin)
+le_privacy          0x0               link_layer.o (symbol from plugin)
+LL_CONTROL_PROCEDURE
+                    0x0               ble_hci.o (symbol from plugin)
+OSTCBPrioTbl        0x0               os_core.o (symbol from plugin)
+
+Discarded input sections
+
+ .text          0x0000000000000000        0x0 /home/bingquan/svn/br20/trunk/sdk/apps/cpu/br18/debug_init.o (symbol from plugin)
+ .text          0x0000000000000000        0x0 /home/bingquan/svn/br20/trunk/sdk/apps/cpu/br18/sys_init.o (symbol from plugin)
+ .text          0x0000000000000000        0x0 /home/bingquan/svn/br20/trunk/sdk/apps/cpu/br18/timer_hw.o (symbol from plugin)
+ .text          0x0000000000000000        0x0 /home/bingquan/svn/br20/trunk/sdk/apps/cpu/br18/uart_hw.o (symbol from plugin)
+ .text          0x0000000000000000        0x0 /home/bingquan/svn/br20/trunk/sdk/apps/cpu/br18/adc_hw.o (symbol from plugin)
+ .text          0x0000000000000000        0x0 /home/bingquan/svn/br20/trunk/sdk/apps/cpu/br18/irtc_hw.o (symbol from plugin)
+ .text          0x0000000000000000        0x0 /home/bingquan/svn/br20/trunk/sdk/apps/cpu/br18/key_drv_ad.o (symbol from plugin)
+ .text          0x0000000000000000        0x0 /home/bingquan/svn/br20/trunk/sdk/apps/cpu/br18/key_drv_io.o (symbol from plugin)
+ .text          0x0000000000000000        0x0 /home/bingquan/svn/br20/trunk/sdk/apps/common/key.o (symbol from plugin)
+ .text          0x0000000000000000        0x0 /home/bingquan/svn/br20/trunk/sdk/apps/common/input_task.o (symbol from plugin)
+ .text          0x0000000000000000        0x0 /home/bingquan/svn/br20/trunk/sdk/apps/common/power.o (symbol from plugin)
+ .text          0x0000000000000000        0x0 /home/bingquan/svn/br20/trunk/sdk/apps/main/board.o (symbol from plugin)
+ .text          0x0000000000000000        0x0 /home/bingquan/svn/br20/trunk/sdk/apps/main/main_task.o (symbol from plugin)
+ .text          0x0000000000000000        0x0 /home/bingquan/svn/br20/trunk/sdk/apps/main/vm_task.o (symbol from plugin)
+ .text          0x0000000000000000        0x0 /home/bingquan/svn/br20/trunk/sdk/apps/bt/bt_task.o (symbol from plugin)
+ .text          0x0000000000000000        0x0 /home/bingquan/svn/br20/trunk/sdk/apps/bt/examples/le_streamer.o (symbol from plugin)
+ .text          0x0000000000000000        0x0 init.o (symbol from plugin)
+ .text          0x0000000000000000        0x0 vmalloc.o (symbol from plugin)
+ .text          0x0000000000000000        0x0 mem_heap.o (symbol from plugin)
+ .text          0x0000000000000000        0x0 printf-stdarg.o (symbol from plugin)
+ .text          0x0000000000000000        0x0 sys_timer.o (symbol from plugin)
+ .text          0x0000000000000000        0x0 thread.o (symbol from plugin)
+ .text          0x0000000000000000        0x0 pmalloc.o (symbol from plugin)
+ .text          0x0000000000000000        0x0 sbrk.o (symbol from plugin)
+ .text          0x0000000000000000        0x0 clock_api.o (symbol from plugin)
+ .text          0x0000000000000000        0x0 power_api.o (symbol from plugin)
+ .text          0x0000000000000000        0x0 interrupt.o (symbol from plugin)
+ .text          0x0000000000000000        0x0 irq_hw.o (symbol from plugin)
+ .text          0x0000000000000000        0x0 clock_hw.o (symbol from plugin)
+ .text          0x0000000000000000        0x0 debug_hw.o (symbol from plugin)
+ .text          0x0000000000000000        0x0 os_time.o (symbol from plugin)
+ .text          0x0000000000000000        0x0 os_api.o (symbol from plugin)
+ .text          0x0000000000000000        0x0 os_core.o (symbol from plugin)
+ .text          0x0000000000000000        0x0 os_mutex.o (symbol from plugin)
+ .text          0x0000000000000000        0x0 os_task.o (symbol from plugin)
+ .text          0x0000000000000000        0x0 os_sem.o (symbol from plugin)
+ .text          0x0000000000000000        0x0 os_q.o (symbol from plugin)
+ .text          0x0000000000000000        0x0 os_cpu_c.o (symbol from plugin)
+ .text          0x0000000000000000        0x0 fpga_analog.o (symbol from plugin)
+ .text          0x0000000000000000        0x0 utils.o (symbol from plugin)
+ .text          0x0000000000000000        0x0 btstack_memory.o (symbol from plugin)
+ .text          0x0000000000000000        0x0 RF.o (symbol from plugin)
+ .text          0x0000000000000000        0x0 bt_power_driver.o (symbol from plugin)
+ .text          0x0000000000000000        0x0 bt_poweroff_reboot.o (symbol from plugin)
+ .text          0x0000000000000000        0x0 analog_ble.o (symbol from plugin)
+ .text          0x0000000000000000        0x0 ble_hci.o (symbol from plugin)
+ .text          0x0000000000000000        0x0 link_layer.o (symbol from plugin)
+ .text          0x0000000000000000        0x0 le_device_db_memory.o (symbol from plugin)
+ .text          0x0000000000000000        0x0 hci.o (symbol from plugin)
+ .text          0x0000000000000000        0x0 h4_transport.o (symbol from plugin)
+ .text          0x0000000000000000        0x0 l2cap.o (symbol from plugin)
+ .text          0x0000000000000000        0x0 l2cap_signaling.o (symbol from plugin)
+ .text          0x0000000000000000        0x0 hci_cmds.o (symbol from plugin)
+ .text          0x0000000000000000        0x0 att_server.o (symbol from plugin)
+ .text          0x0000000000000000        0x0 sm.o (symbol from plugin)
+ .text          0x0000000000000000        0x0 bt_memory.o (symbol from plugin)
+ .text          0x0000000000000000        0x0 memory_pool.o (symbol from plugin)
+ .text          0x0000000000000000        0x0 RF_ble.o (symbol from plugin)
+ .text          0x0000000000000000        0x0 att.o (symbol from plugin)
+ .text          0x0000000000000000        0x0 att_dispatch.o (symbol from plugin)
+ .text          0x0000000000000000        0x0 linked_list.o (symbol from plugin)
+ .text          0x0000000000000000        0x0 delay.o (symbol from plugin)
+ .text          0x0000000000000000        0x0 vsprintf.o (symbol from plugin)
+ .text          0x0000000000000000        0x0 lbuf.o (symbol from plugin)
+ .text          0x0000000000000000        0x0 icache_hw.o (symbol from plugin)
+ .text          0x0000000000000000        0x0 spi_hw.o (symbol from plugin)
+
+Memory Configuration
+
+Name             Origin             Length             Attributes
+flash            0x0000000001000000 0x0000000001000000 x
+ram0             0x0000000000300000 0x000000000001a000
+nvram            0x0000000000340080 0x0000000000005fcc
+*default*        0x0000000000000000 0xffffffffffffffff
+
+Linker script and memory map
+
+LOAD /home/bingquan/svn/br20/trunk/sdk/apps/cpu/br18/debug_init.o
+LOAD /home/bingquan/.my_tmp/lto-llvm-95aab4.o
+LOAD /home/bingquan/svn/br20/trunk/sdk/apps/cpu/br18/sys_init.o
+LOAD /home/bingquan/svn/br20/trunk/sdk/apps/cpu/br18/timer_hw.o
+LOAD /home/bingquan/svn/br20/trunk/sdk/apps/cpu/br18/uart_hw.o
+LOAD /home/bingquan/svn/br20/trunk/sdk/apps/cpu/br18/adc_hw.o
+LOAD /home/bingquan/svn/br20/trunk/sdk/apps/cpu/br18/irtc_hw.o
+LOAD /home/bingquan/svn/br20/trunk/sdk/apps/cpu/br18/key_drv_ad.o
+LOAD /home/bingquan/svn/br20/trunk/sdk/apps/cpu/br18/key_drv_io.o
+LOAD /home/bingquan/svn/br20/trunk/sdk/apps/common/key.o
+LOAD /home/bingquan/svn/br20/trunk/sdk/apps/common/input_task.o
+LOAD /home/bingquan/svn/br20/trunk/sdk/apps/common/power.o
+LOAD /home/bingquan/svn/br20/trunk/sdk/apps/main/board.o
+LOAD /home/bingquan/svn/br20/trunk/sdk/apps/main/main_task.o
+LOAD /home/bingquan/svn/br20/trunk/sdk/apps/main/vm_task.o
+LOAD /home/bingquan/svn/br20/trunk/sdk/apps/bt/bt_task.o
+LOAD /home/bingquan/svn/br20/trunk/sdk/apps/bt/examples/le_streamer.o
+LOAD /home/bingquan/svn/br20/trunk/sdk/apps/cpu/br18/startup.o
+START GROUP
+LOAD ../include_lib/common_lib.a
+LOAD ../include_lib/cpu_lib_br18.a
+LOAD ../include_lib/rtos_lib_br18.a
+LOAD ../include_lib/stream_lib.a
+LOAD ../include_lib/btstack_lib.a
+LOAD ../include_lib/br16_ccm_aes.a
+END GROUP
+LOAD /opt/pi32/test/lib/libc.a
+LOAD /opt/pi32/test/lib/libcompiler-rt.a
+                0x0000000000300000                . = ORIGIN (ram0)
+
+.data           0x0000000000300000      0x376
+ *(.data*)
+ .data          0x0000000000300000       0x70 /home/bingquan/.my_tmp/lto-llvm-95aab4.o
+ .data          0x0000000000300070        0x0 ../include_lib/br16_ccm_aes.a(aes.o)
+ .data          0x0000000000300070        0x0 ../include_lib/br16_ccm_aes.a(ccm_memory.o)
+ .data          0x0000000000300070        0x0 /opt/pi32/test/lib/libc.a(lib_a-memcmp.o)
+ .data          0x0000000000300070        0x0 /opt/pi32/test/lib/libc.a(lib_a-memcpy.o)
+ .data          0x0000000000300070        0x0 /opt/pi32/test/lib/libc.a(lib_a-memset.o)
+ .data          0x0000000000300070        0x0 /opt/pi32/test/lib/libc.a(lib_a-strlen.o)
+ *(.flushinv_icache)
+ *(.volatile_ram)
+ .volatile_ram  0x0000000000300070       0x2c /home/bingquan/.my_tmp/lto-llvm-95aab4.o
+ *(.volatile_ram_code)
+ .volatile_ram_code
+                0x000000000030009c      0x2da /home/bingquan/.my_tmp/lto-llvm-95aab4.o
+                0x0000000000300376                mpu_prp_start = .
+                0x0000000000300376                mpu_prp_end = .
+                0x0000000000300376                mpu_pc_start = .
+                0x0000000000300376                mpu_pc_end = .
+
+.db_memory      0x0000000000300378      0x180
+ .db_memory     0x0000000000300378      0x180 /home/bingquan/.my_tmp/lto-llvm-95aab4.o
+
+.bss            0x0000000000300500     0x1cfc
+ *(.stack)
+ .stack         0x0000000000300500      0x400 /home/bingquan/svn/br20/trunk/sdk/apps/cpu/br18/startup.o
+                0x0000000000300900                _stack
+ .stack         0x0000000000300900      0x400 ../include_lib/btstack_lib.a(reboot.o)
+                0x0000000000300d00                _ustack
+ *(.ustack)
+                0x0000000000300d00                . = ALIGN (0x4)
+ *(.bss)
+ .bss           0x0000000000300d00     0x14f0 /home/bingquan/.my_tmp/lto-llvm-95aab4.o
+ .bss           0x00000000003021f0        0x4 ../include_lib/cpu_lib_br18.a(irq_asm.o)
+ .bss           0x00000000003021f4        0x0 ../include_lib/br16_ccm_aes.a(aes.o)
+ .bss           0x00000000003021f4        0x0 ../include_lib/br16_ccm_aes.a(ccm_memory.o)
+ .bss           0x00000000003021f4        0x0 /opt/pi32/test/lib/libc.a(lib_a-memcmp.o)
+ .bss           0x00000000003021f4        0x0 /opt/pi32/test/lib/libc.a(lib_a-memcpy.o)
+ .bss           0x00000000003021f4        0x0 /opt/pi32/test/lib/libc.a(lib_a-memset.o)
+ .bss           0x00000000003021f4        0x0 /opt/pi32/test/lib/libc.a(lib_a-strlen.o)
+ COMMON         0x00000000003021f4        0x8 /home/bingquan/.my_tmp/lto-llvm-95aab4.o
+                0x00000000003021f4                OSTCBHighRdy
+                0x00000000003021f8                OSTCBCur
+                0x0000000000300000                SDRAM_BEGIN_ADDR = ORIGIN (ram0)
+                0x00000000003021fc                SRAM_END_ADDR = .
+                0x00000000000021fc                sram_end = (. - ORIGIN (ram0))
+                0x0000000000340080                . = ORIGIN (nvram)
+
+.data1          0x0000000000340080     0x45a8
+                0x0000000000340080                . = ALIGN (0x4)
+ *(.ram1_data)
+ *(.ram1_text)
+ *(.non_volatile_ram)
+ .non_volatile_ram
+                0x0000000000340080      0xf05 /home/bingquan/.my_tmp/lto-llvm-95aab4.o
+ *(.ble_bb_ram)
+ *fill*         0x0000000000340f85        0x3 
+ .ble_bb_ram    0x0000000000340f88      0x5fc /home/bingquan/.my_tmp/lto-llvm-95aab4.o
+ *(.ble_memory_pool)
+ .ble_memory_pool
+                0x0000000000341584      0x800 /home/bingquan/.my_tmp/lto-llvm-95aab4.o
+ *(.ble_rf_ram)
+ .ble_rf_ram    0x0000000000341d84      0x900 /home/bingquan/.my_tmp/lto-llvm-95aab4.o
+                0x0000000000342684                nvram_data_size = .
+ *(.bt_rf_code)
+ .bt_rf_code    0x0000000000342684      0x1a0 /home/bingquan/.my_tmp/lto-llvm-95aab4.o
+ *(.non_volatile_ram_code)
+ .non_volatile_ram_code
+                0x0000000000342824      0x4dc /home/bingquan/.my_tmp/lto-llvm-95aab4.o
+                0x0000000000342bec                poweroff_post
+ .non_volatile_ram_code
+                0x0000000000342d00       0x30 ../include_lib/btstack_lib.a(reboot.o)
+                0x0000000000342d00                _reboot_start
+ *(.uart_hw_code)
+ .uart_hw_code  0x0000000000342d30      0x144 /home/bingquan/.my_tmp/lto-llvm-95aab4.o
+ *(.irq_hw_code)
+ .irq_hw_code   0x0000000000342e74      0x314 /home/bingquan/.my_tmp/lto-llvm-95aab4.o
+ *(.irq_drv)
+ .irq_drv       0x0000000000343188        0x4 /home/bingquan/.my_tmp/lto-llvm-95aab4.o
+                0x0000000000343188                __irq_drv
+ *(.lbuf_code)
+ .lbuf_code     0x000000000034318c      0x272 /home/bingquan/.my_tmp/lto-llvm-95aab4.o
+ *(.sys_timer_code)
+ *fill*         0x00000000003433fe        0x2 
+ .sys_timer_code
+                0x0000000000343400      0x126 /home/bingquan/.my_tmp/lto-llvm-95aab4.o
+ *memcpy.o(.text .rodata*)
+ *fill*         0x0000000000343526        0x2 
+ .text          0x0000000000343528      0x11e /opt/pi32/test/lib/libc.a(lib_a-memcpy.o)
+                0x0000000000343528                memmove
+                0x0000000000343528                memcpy
+ *memset.o(.text .rodata*)
+ *fill*         0x0000000000343646        0x2 
+ .text          0x0000000000343648       0x48 /opt/pi32/test/lib/libc.a(lib_a-memset.o)
+                0x0000000000343648                memset
+ *irq_asm.o(.text .rodata*)
+ .text          0x0000000000343690       0x26 ../include_lib/cpu_lib_br18.a(irq_asm.o)
+                0x0000000000343690                CPU_INT_DIS
+                0x00000000003436a2                CPU_INT_EN
+ *(uart_hw.rodata*)
+ *(RF_ble.rodata*)
+ *fill*         0x00000000003436b6        0x2 
+ RF_ble.rodata  0x00000000003436b8      0x75a /home/bingquan/.my_tmp/lto-llvm-95aab4.o
+ *(bt_poweroff_reboot.rodata*)
+ *fill*         0x0000000000343e12        0x2 
+ bt_poweroff_reboot.rodata
+                0x0000000000343e14       0xa9 /home/bingquan/.my_tmp/lto-llvm-95aab4.o
+ *(debug_init.rodata*)
+ *fill*         0x0000000000343ebd        0x3 
+ debug_init.rodata
+                0x0000000000343ec0      0x1a2 /home/bingquan/.my_tmp/lto-llvm-95aab4.o
+ *(.icache_drv)
+ *fill*         0x0000000000344062        0x2 
+ .icache_drv    0x0000000000344064        0x4 /home/bingquan/.my_tmp/lto-llvm-95aab4.o
+                0x0000000000344064                __icache_drv
+ *(.icache_hw_code)
+ .icache_hw_code
+                0x0000000000344068      0x2cc /home/bingquan/.my_tmp/lto-llvm-95aab4.o
+ *(.spi0_drv)
+ .spi0_drv      0x0000000000344334        0x4 /home/bingquan/.my_tmp/lto-llvm-95aab4.o
+                0x0000000000344334                __spi0_drv
+ *(.spi0_hw_code)
+ .spi0_hw_code  0x0000000000344338      0x2f0 /home/bingquan/.my_tmp/lto-llvm-95aab4.o
+                0x0000000000001fa4                nvram_code_size = (. - nvram_data_size)
+                0x0000000001000000                . = ORIGIN (flash)
+
+.text           0x0000000001000000    0x105d4
+ *startup.o(.text)
+ .text          0x0000000001000000       0xba /home/bingquan/svn/br20/trunk/sdk/apps/cpu/br18/startup.o
+                0x0000000001000000                _start
+                0x00000000010000bc                . = ((. + 0x3) & 0xfffffffffffffffc)
+ *fill*         0x00000000010000ba        0x2 
+                0x00000000010000bc                _sys_initcall_begin = .
+ *(.sys.initcall)
+ .sys.initcall  0x00000000010000bc        0x8 /home/bingquan/.my_tmp/lto-llvm-95aab4.o
+                0x00000000010000bc                __initcall_app_sys_init
+                0x00000000010000c0                __initcall_app_power_init
+                0x00000000010000c4                _sys_initcall_end = .
+                0x00000000010000c4                . = ((. + 0x3) & 0xfffffffffffffffc)
+                0x00000000010000c4                _early_initcall_begin = .
+ *(.early.initcall)
+ .early.initcall
+                0x00000000010000c4        0x8 /home/bingquan/.my_tmp/lto-llvm-95aab4.o
+                0x00000000010000c4                __initcall___periodic_timer0_init
+                0x00000000010000c8                __initcall_rtc_init
+                0x00000000010000cc                _early_initcall_end = .
+                0x00000000010000cc                . = ((. + 0x3) & 0xfffffffffffffffc)
+                0x00000000010000cc                _initcall_begin = .
+ *(.initcall)
+ .initcall      0x00000000010000cc        0x4 /home/bingquan/.my_tmp/lto-llvm-95aab4.o
+                0x00000000010000cc                __initcall_app_timer_init
+                0x00000000010000d0                _initcall_end = .
+                0x00000000010000d0                . = ((. + 0x3) & 0xfffffffffffffffc)
+                0x00000000010000d0                _late_initcall_begin = .
+ *(.late.initcall)
+ .late.initcall
+                0x00000000010000d0        0x8 /home/bingquan/.my_tmp/lto-llvm-95aab4.o
+                0x00000000010000d0                __initcall_sys_init
+                0x00000000010000d4                __initcall_key_input_init
+                0x00000000010000d8                _late_initcall_end = .
+                0x00000000010000d8                . = ((. + 0x3) & 0xfffffffffffffffc)
+                0x00000000010000d8                _app_initcall_begin = .
+ *(.app.initcall)
+ .app.initcall  0x00000000010000d8       0x10 /home/bingquan/.my_tmp/lto-llvm-95aab4.o
+                0x00000000010000d8                __initcall_app_debug_init
+                0x00000000010000dc                __initcall_input_task_init
+                0x00000000010000e0                __initcall_main_task_init
+                0x00000000010000e4                __initcall_bt_task_init
+                0x00000000010000e8                _app_initcall_end = .
+                0x00000000010000e8                . = ALIGN (0x4)
+ *(.bt_memory_code)
+ .bt_memory_code
+                0x00000000010000e8       0xb4 /home/bingquan/.my_tmp/lto-llvm-95aab4.o
+ *(.power)
+                0x000000000100019c                btstack_le_code_start = .
+ *(.ble)
+ .ble           0x000000000100019c       0x10 /home/bingquan/.my_tmp/lto-llvm-95aab4.o
+                0x000000000100019c                __ble_ops
+                0x00000000010001a0                ble_h4_can_send_packet_now
+                0x00000000010001a4                ble_h4_send_packet
+                0x00000000010001a8                ble_h4_packet_handler
+ *(.ble_rf_code)
+ .ble_rf_code   0x00000000010001ac     0x21b4 /home/bingquan/.my_tmp/lto-llvm-95aab4.o
+ *(.ble_ll_probe_code)
+ .ble_ll_probe_code
+                0x0000000001002360      0x350 /home/bingquan/.my_tmp/lto-llvm-95aab4.o
+ *(.ble_ll_code)
+ .ble_ll_code   0x00000000010026b0     0x2914 /home/bingquan/.my_tmp/lto-llvm-95aab4.o
+ *(.ble_h4_code)
+ .ble_h4_code   0x0000000001004fc4      0x810 /home/bingquan/.my_tmp/lto-llvm-95aab4.o
+ *(.ble_hci_code)
+ .ble_hci_code  0x00000000010057d4     0x1340 /home/bingquan/.my_tmp/lto-llvm-95aab4.o
+ *(.ble_l2cap_code)
+ .ble_l2cap_code
+                0x0000000001006b14      0x488 /home/bingquan/.my_tmp/lto-llvm-95aab4.o
+ *(.ble_gap_code)
+ .ble_gap_code  0x0000000001006f9c       0xa4 /home/bingquan/.my_tmp/lto-llvm-95aab4.o
+ *(.ble_att_code)
+ *(.ble_sm_code)
+ *(.ble_gatt_code)
+ *(.ble_ancs_code)
+ *(.ble_app_code)
+                0x0000000000006ea4                btstack_le_code_size = (. - btstack_le_code_start)
+                0x0000000001007040                vm_used_code_start = .
+ *(.winbond_flash_code)
+ *(.vm_code)
+                0x0000000001007040                vm_used_code_end = .
+ *(.text* .rodata*)
+ .text          0x0000000001007040     0x70d8 /home/bingquan/.my_tmp/lto-llvm-95aab4.o
+                0x0000000001007840                sys_arch_init
+                0x0000000001009a08                power_is_poweroff_probe
+                0x000000000100a2a4                OSTaskSwitchHook
+                0x000000000100e110                __clock_drv
+                0x000000000100e114                __debug_drv
+ *fill*         0x000000000100e118        0x8 
+ .rodata        0x000000000100e120      0x61b /home/bingquan/.my_tmp/lto-llvm-95aab4.o
+ .rodata.str1.1
+                0x000000000100e73b     0x174c /home/bingquan/.my_tmp/lto-llvm-95aab4.o
+                                       0x1794 (size before relaxing)
+ *fill*         0x000000000100fe87        0x1 
+ .text          0x000000000100fe88       0x6c ../include_lib/rtos_lib_br18.a(os_cpu.o)
+                0x000000000100fe88                OS_HighPrio
+                0x000000000100fe92                OSCtxSw
+ .text          0x000000000100fef4        0x0 ../include_lib/btstack_lib.a(reboot.o)
+ .text          0x000000000100fef4      0x394 ../include_lib/br16_ccm_aes.a(aes.o)
+                0x000000000100fef4                aes128_start_enc
+                0x0000000001010024                aes128_start_dec
+                0x0000000001010154                rijndael_setup
+                0x0000000001010194                rijndael_ecb_encrypt
+ .text          0x0000000001010288      0x2fe ../include_lib/br16_ccm_aes.a(ccm_memory.o)
+                0x0000000001010288                ccm_memory
+ *fill*         0x0000000001010586        0x2 
+ .text          0x0000000001010588       0x3e /opt/pi32/test/lib/libc.a(lib_a-memcmp.o)
+                0x0000000001010588                memcmp
+ *fill*         0x00000000010105c6        0x2 
+ .text          0x00000000010105c8        0xc /opt/pi32/test/lib/libc.a(lib_a-strlen.o)
+                0x00000000010105c8                strlen
+                0x00000000010105d4                mpu_pc_ex_start = .
+                0x00000000010105d4                mpu_pc_ex_end = .
+                0x00000000010105d4                text_end = .
+                0x0000000000300000                data_addr = ADDR (.data)
+                0x00000000010105d4                data_begin = text_end
+                0x0000000000000376                data_size = SIZEOF (.data)
+                0x0000000000340080                data1_addr = ADDR (.data1)
+                0x000000000101094a                data1_begin = (text_end + SIZEOF (.data))
+                0x00000000000045a8                data1_size = SIZEOF (.data1)
+                0x0000000000300500                bss_begin = ADDR (.bss)
+                0x0000000000001cfc                bss_size = SIZEOF (.bss)
+OUTPUT(post_build/br18/.or32 elf32-pi32)
+
+.debug_str      0x0000000000000000     0xf2bb
+ .debug_str     0x0000000000000000     0xf2bb /home/bingquan/.my_tmp/lto-llvm-95aab4.o
+                                      0x104a9 (size before relaxing)
+
+.debug_loc      0x0000000000000000     0x89eb
+ .debug_loc     0x0000000000000000     0x89eb /home/bingquan/.my_tmp/lto-llvm-95aab4.o
+
+.debug_abbrev   0x0000000000000000      0xc22
+ .debug_abbrev  0x0000000000000000      0xb82 /home/bingquan/.my_tmp/lto-llvm-95aab4.o
+ .debug_abbrev  0x0000000000000b82       0x28 /home/bingquan/svn/br20/trunk/sdk/apps/cpu/br18/startup.o
+ .debug_abbrev  0x0000000000000baa       0x28 ../include_lib/cpu_lib_br18.a(irq_asm.o)
+ .debug_abbrev  0x0000000000000bd2       0x28 ../include_lib/rtos_lib_br18.a(os_cpu.o)
+ .debug_abbrev  0x0000000000000bfa       0x28 ../include_lib/btstack_lib.a(reboot.o)
+
+.debug_info     0x0000000000000000    0x1e163
+ .debug_info    0x0000000000000000    0x1db2f /home/bingquan/.my_tmp/lto-llvm-95aab4.o
+ .debug_info    0x000000000001db2f      0x15f /home/bingquan/svn/br20/trunk/sdk/apps/cpu/br18/startup.o
+ .debug_info    0x000000000001dc8e      0x189 ../include_lib/cpu_lib_br18.a(irq_asm.o)
+ .debug_info    0x000000000001de17      0x1ca ../include_lib/rtos_lib_br18.a(os_cpu.o)
+ .debug_info    0x000000000001dfe1      0x182 ../include_lib/btstack_lib.a(reboot.o)
+
+.debug_ranges   0x0000000000000000     0x2428
+ .debug_ranges  0x0000000000000000     0x2428 /home/bingquan/.my_tmp/lto-llvm-95aab4.o
+
+.debug_macinfo  0x0000000000000000        0x1
+ .debug_macinfo
+                0x0000000000000000        0x1 /home/bingquan/.my_tmp/lto-llvm-95aab4.o
+
+.debug_pubnames
+                0x0000000000000000     0x86db
+ .debug_pubnames
+                0x0000000000000000     0x86db /home/bingquan/.my_tmp/lto-llvm-95aab4.o
+
+.debug_pubtypes
+                0x0000000000000000     0x2b2c
+ .debug_pubtypes
+                0x0000000000000000     0x2b2c /home/bingquan/.my_tmp/lto-llvm-95aab4.o
+
+.debug_line     0x0000000000000000     0xf7d5
+ .debug_line    0x0000000000000000     0xf55d /home/bingquan/.my_tmp/lto-llvm-95aab4.o
+ .debug_line    0x000000000000f55d       0xb6 /home/bingquan/svn/br20/trunk/sdk/apps/cpu/br18/startup.o
+ .debug_line    0x000000000000f613       0x86 ../include_lib/cpu_lib_br18.a(irq_asm.o)
+ .debug_line    0x000000000000f699       0xa6 ../include_lib/rtos_lib_br18.a(os_cpu.o)
+ .debug_line    0x000000000000f73f       0x96 ../include_lib/btstack_lib.a(reboot.o)
+
+.debug_aranges  0x0000000000000000       0x80
+ .debug_aranges
+                0x0000000000000000       0x20 /home/bingquan/svn/br20/trunk/sdk/apps/cpu/br18/startup.o
+ .debug_aranges
+                0x0000000000000020       0x20 ../include_lib/cpu_lib_br18.a(irq_asm.o)
+ .debug_aranges
+                0x0000000000000040       0x20 ../include_lib/rtos_lib_br18.a(os_cpu.o)
+ .debug_aranges
+                0x0000000000000060       0x20 ../include_lib/btstack_lib.a(reboot.o)

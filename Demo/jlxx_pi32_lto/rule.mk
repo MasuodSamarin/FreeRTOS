@@ -28,6 +28,14 @@ all: $(OBJS_LS) $(OBJS_BS) $(OBJS_C)
 	$(V) $(LD) $(LD_ARGS) $(OUTPUT_EXES) $(OBJS_C) $(OBJS_LS) $(OBJS_BS) $(LIBS) $(SYS_LIBS) $(LINKER) --output-version-info $(DIR_OUTPUT)/ver.bin
 	@$(DIR_OUTPUT)\download.bat $(EXES) $(OBJDUMP) $(OBJCOPY) $(BANKZIP)
 
+debug:
+	@echo "--LS"
+	@echo $(OBJS_LS) 
+	@echo "--BS"
+	@echo $(OBJS_BS) 
+	@echo "--C"
+	@echo $(OBJS_C) 
+
 archive:$(OBJS_LS) $(OBJS_BS) $(OBJS_C) 
 	@if exist $(LIB_DIR) (rd /s/q $(LIB_DIR))
 	@mkdir $(LIB_DIR)
@@ -43,7 +51,6 @@ clean:
 	@if exist $(OUTPUT_EXES) del $(OUTPUT_EXES)
 	@if exist $(INCLUDE_LIB_PATH)\$(ARCHIVE) del $(INCLUDE_LIB_PATH)\$(ARCHIVE)
  
- 
 $(OBJS_LS):%.o:%.s
 	@if exist $(subst /,\,$@) del $(subst /,\,$@)
 	@echo + ss $<
@@ -51,6 +58,7 @@ $(OBJS_LS):%.o:%.s
  
 $(OBJS_BS):%.o:%.S
 	@if exist $(subst /,\,$@) del $(subst /,\,$@)
+	@echo + SS $<
 	$(V) $(CC)  $(SYS_INCLUDES) $(INCLUDES) -D__ASSEMBLY__ $(CC_ARGS) $(CC_ARG) -c $< -o $@
  
 $(OBJS_C):%.o:%.c
@@ -58,7 +66,6 @@ $(OBJS_C):%.o:%.c
 	@echo + CC $<
 	$(V) $(CC)  $(SYS_INCLUDES) $(INCLUDES) $(CC_ARGS) $(CC_ARG) -c $< -o $@
 
- 
 $(DEPS_C):%.d:%.c
 	$(V) $(CC) -MM $(SYS_INCLUDES) $(INCLUDES) $< > $@.1
 	$(V) $(DEPENDS) $@ $(dir $@) $(subst /,\,$@)
@@ -71,8 +78,6 @@ $(DEPS_LS):%.d:%.s
 	$(V) $(CC) -MM $(SYS_INCLUDES) $(INCLUDES) $< > $@.1
 	$(V) $(DEPENDS) $@ $(dir $@) $(subst /,\,$@)
  
- 
-
 endif
 
 #*************************************************************************
@@ -105,7 +110,6 @@ clean:
 
 dry_run:$(OBJS_LS) $(OBJS_BS) $(OBJS_C) 
 	@echo Congratulation!
-
  
 $(OBJS_LS):%.o:%.s
 	@if [ -f $@ ]; then rm $@; fi
@@ -121,8 +125,6 @@ $(OBJS_C):%.o:%.c
 	@echo + CC $<
 	$(V) $(CC)  $(SYS_INCLUDES) $(INCLUDES) $(CC_ARGS) $(CC_ARG) -c $< -o $@
 
- # 
- #
 $(DEPS_C):%.d:%.c
 	$(V) $(CC) -MM $(SYS_INCLUDES) $(INCLUDES) $< | sed 's,\($(notdir $*)\)\.o[:]*,$(dir $@)\1.o $@ : ,g' > $@
 

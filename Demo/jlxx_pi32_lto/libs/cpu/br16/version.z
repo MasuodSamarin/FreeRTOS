@@ -1,0 +1,4 @@
+.section .version;
+
+    .long __TIMESTAMPNUM__
+	.asciz "cpu_v1-0-0"

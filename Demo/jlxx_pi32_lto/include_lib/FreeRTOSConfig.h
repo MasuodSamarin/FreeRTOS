@@ -28,7 +28,7 @@
 #ifndef FREERTOS_CONFIG_H
 #define FREERTOS_CONFIG_H
 
-#include <msp430x44x.h>
+#include <cpu.h>
 
 /*-----------------------------------------------------------
  * Application specific definitions.
@@ -45,7 +45,7 @@
 #define configUSE_PREEMPTION		1
 #define configUSE_IDLE_HOOK			1
 #define configUSE_TICK_HOOK			0
-#define configCPU_CLOCK_HZ			( ( unsigned long ) 7995392 ) /* Clock setup from main.c in the demo application. */
+#define configCPU_CLOCK_HZ			( ( unsigned long ) 48000000L) /* Clock setup from main.c in the demo application. */
 #define configTICK_RATE_HZ			( ( TickType_t ) 1000 )
 #define configMAX_PRIORITIES		( 4 )
 #define configMINIMAL_STACK_SIZE	( ( unsigned short ) 50 )

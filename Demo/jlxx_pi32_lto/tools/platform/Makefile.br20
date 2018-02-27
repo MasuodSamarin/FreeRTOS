@@ -17,7 +17,7 @@ export TYPE=CHIP
 export NICKNAME=br20_sdk
 
 # 配置BLE 蓝牙模式(CONTROLLER_MODE/FULL_MODE)
-export LE_MODE=CONTROLLER_MODE
+export LE_MODE=FULL_MODE
 
 #配置下载介质(otp/flash)
 export CODE_SPACE=otp

@@ -15,30 +15,36 @@ INCLUDES = \
 -I../include_lib/common \
 -I../include_lib/cpu \
 -I../include_lib/cpu/$(RELEASE) \
--I../../../Source/include \	
--I../../../Source/portable/pi32_lto/jlxx/$(RELEASE) \	
+-I../include_lib/btstack \
+-I../../../Source/include \
+-I../../../Source/portable/pi32_lto/jlxx/$(RELEASE) \
 -I../../Common/include \
 
--# Setup paths to source code	
-SOURCE_PATH 	= ../../../Source	
-PORT_PATH 		= ../../../Source/portable/pi32_lto/jlxx/$(RELEASE)
-DEMO_PATH 		= ../../Common/Minimal
+# Setup paths to source code	
+export SOURCE_PATH 	= ../../../Source
+export PORT_PATH 	= ../../../Source/portable/pi32_lto/jlxx/$(RELEASE)
+export DEMO_PATH 	= ../../Common/Minimal
 
+# Add core code for FreeRTOS base
+
+# Add application code
 SRCS_C = \
 cpu/$(RELEASE)/debug_init.c \
 cpu/$(RELEASE)/sys_init.c \
 cpu/$(RELEASE)/uart_hw.c \
-$(SOURCE_PATH)/tasks.c \	
-$(SOURCE_PATH)/list.c \	
-$(SOURCE_PATH)/queue.c \	
-$(SOURCE_PATH)/portable/MemMang/heap_1.c \	
-$(DEMO_PATH)/flash.c \	
-$(DEMO_PATH)/integer.c \	
-$(DEMO_PATH)/comtest.c \	
-$(DEMO_PATH)/PollQ.c	
-$(PORT_PATH)/port.c \
-$(PORT_PATH)/portISR.c \
 main.c
+
+# SRCS_C = \
+# $(SOURCE_PATH)/tasks.c \
+# $(SOURCE_PATH)/list.c \
+# $(SOURCE_PATH)/queue.c \
+# $(SOURCE_PATH)/portable/MemMang/heap_1.c \
+# $(DEMO_PATH)/flash.c \
+# $(DEMO_PATH)/integer.c \
+# $(DEMO_PATH)/comtest.c \
+# $(DEMO_PATH)/PollQ.c \
+# $(PORT_PATH)/portISR.c \
+# $(PORT_PATH)/port.c \
 
 
 ifeq ($(LE_MODE), CONTROLLER_MODE)
@@ -69,9 +75,6 @@ LIBS = \
 --start-group \
 ../include_lib/common_lib.a \
 ../include_lib/cpu_lib_$(RELEASE).a  \
-../include_lib/rtos_lib_$(RELEASE).a  \
-../include_lib/btstack_lib.a \
-../include_lib/aes_lib_pi32.a \
 --end-group \
 
 

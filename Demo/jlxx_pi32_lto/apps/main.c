@@ -219,26 +219,8 @@ static unsigned long ulLastIdleLoops = 0UL;
 
 static void prvSetupHardware( void )
 {
-    irq_init();
+    /*-TODO-*/
 
-    /* mem_init(); */
-
-    /* __asm__(\ */
-            /* ".extern _sys_stack\n\t" \ */
-            /* "movh sp, _sys_stack\n\t" \ */
-            /* "movl sp, _sys_stack\n\t" \ */
-            /* [> "j sys_main\n\t" \ <] */
-           /* ); */
-
-    /* rtos_init(rtos_embedded_get_instance()); */
-
-    clock_init(APP_CLOCK_IN, APP_OSC_Hz, APP_SYS_Hz);
-
-    close_wdt();
-
-    uart_init(APP_UART_BAUD);
-
-    debug_reset_source();
 }
 /*-----------------------------------------------------------*/
 
@@ -246,7 +228,9 @@ void vApplicationIdleHook( void );
 void vApplicationIdleHook( void )
 {
 	/* Simple put the CPU into lowpower mode. */
-	_BIS_SR( LPM3_bits );
+    __asm__ volatile ("idle");
+    __asm__ volatile ("nop");
+    __asm__ volatile ("nop");
 	ulIdleLoops++;
 }
 /*-----------------------------------------------------------*/

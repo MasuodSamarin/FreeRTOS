@@ -219,24 +219,24 @@ static unsigned long ulLastIdleLoops = 0UL;
 
 static void prvSetupHardware( void )
 {
-	/* Stop the watchdog. */
-	WDTCTL = WDTPW + WDTHOLD;
+	/* [> Stop the watchdog. <] */
+	/* WDTCTL = WDTPW + WDTHOLD; */
 
-	/* Setup DCO+ for ( xtal * D * (N + 1) ) operation. */
-	FLL_CTL0 |= DCOPLUS + XCAP18PF; 
+	/* [> Setup DCO+ for ( xtal * D * (N + 1) ) operation. <] */
+	/* FLL_CTL0 |= DCOPLUS + XCAP18PF;  */
 
-	/* X2 DCO frequency, 8MHz nominal DCO */
-	SCFI0 |= FN_4;                  
+	/* [> X2 DCO frequency, 8MHz nominal DCO <] */
+	/* SCFI0 |= FN_4;                   */
 
-	/* (121+1) x 32768 x 2 = 7.99 Mhz */
-	SCFQCTL = mainMAX_FREQUENCY;
+	/* [> (121+1) x 32768 x 2 = 7.99 Mhz <] */
+	/* SCFQCTL = mainMAX_FREQUENCY; */
 
-	/* Setup the IO as per the SoftBaugh demo for the same target hardware. */
-	P1SEL = 0x32;
-	P2SEL = 0x00;
-	P3SEL = 0x00;
-	P4SEL = 0xFC;
-	P5SEL = 0xFF;
+	/* [> Setup the IO as per the SoftBaugh demo for the same target hardware. <] */
+	/* P1SEL = 0x32; */
+	/* P2SEL = 0x00; */
+	/* P3SEL = 0x00; */
+	/* P4SEL = 0xFC; */
+	/* P5SEL = 0xFF; */
 }
 /*-----------------------------------------------------------*/
 
@@ -244,7 +244,7 @@ void vApplicationIdleHook( void );
 void vApplicationIdleHook( void )
 {
 	/* Simple put the CPU into lowpower mode. */
-	_BIS_SR( LPM3_bits );
+	/* _BIS_SR( LPM3_bits ); */
 	ulIdleLoops++;
 }
 /*-----------------------------------------------------------*/
