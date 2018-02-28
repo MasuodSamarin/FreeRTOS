@@ -178,7 +178,7 @@ static void __mpu_enable(void)
 
 static void sys_tick_500ms(void)
 {
-    /* puts("."); */
+    puts(".");
     /* JL_SYSTEM->WDT_CON |= BIT(6); */
     /* printf("LSB clock : %d\n", TIMER_CLK); */
 }
@@ -238,7 +238,7 @@ static void debug_reset_source(void)
     }
 }
 
-const char pubDate[] = "\r\n[BT Dual-Mode SDK Main "__DATE__ " "__TIME__ "]\r\n";
+const char pubDate[] = "\r\n[FreeRTOS SDK Main "__DATE__ " "__TIME__ "]\r\n";
 extern u32 args[3];
 
 static void app_debug_init(void)
@@ -252,7 +252,6 @@ static void app_debug_init(void)
         } else {
             puts("\r\n============Flash============\r\n");
         }
-        puts("[Vendor] Hisilicon - v11.4\n");
 
         puts("app_initcall - app_debug_init\n");
 

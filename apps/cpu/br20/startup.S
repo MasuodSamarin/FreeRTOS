@@ -31,7 +31,6 @@ _sys_stack:
     .org 0
 
     .extern sys_arch_init
-    .extern power_is_poweroff_probe
 _start:
     mov  r7,r0
     mov  r5,r1
@@ -40,11 +39,6 @@ _start:
     movl ssp, _stack
     movh sp, _stack
     movl sp, _stack
-
-
-    call power_is_poweroff_probe
-    cmp  r0 ,0
-    jne .clean_bss
 
     movh  r0, data1_addr
     movl  r0, data1_addr

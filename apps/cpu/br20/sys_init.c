@@ -30,7 +30,7 @@ static struct sys_hdl hdl;
 u32 args[3];
 
 void OSIdleTaskInit(u32 stack_size);
-void sys_main(void);
+void main(void);
 
 #define WD_1MS			0x00
 #define WD_2MS			0x01
@@ -126,10 +126,10 @@ void sys_arch_init(u32 cfg_addr, u32 addr, u32 res)
             "movl sp, _sys_stack\n\t" \
             /* "j sys_main\n\t" \ */
            );
-    rtos_init(rtos_embedded_get_instance());
+    /* rtos_init(rtos_embedded_get_instance()); */
 #endif
 
-    sys_main();
+    main();
 }
 
 static void app_sys_init()
@@ -156,7 +156,7 @@ __initcall(app_timer_init);
 
 static void app_os_time_tick(struct sys_timer *timer)
 {
-    rtos_time_tick(APP_TICKS_UNIT);
+    /* rtos_time_tick(APP_TICKS_UNIT); */
 
     sys_timer_register(&__this->timeout, APP_TICKS_UNIT, app_os_time_tick);
 }

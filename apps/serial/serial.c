@@ -42,10 +42,13 @@
 
 /* Demo application includes. */
 #include "serial.h"
+#include "interrupt.h"
+#include "irq_interface.h"
+#include "sdk_cfg.h"
 
 /* setup the hardware mapping. */
 #define UART_BUF        JL_UART2->BUF
-#define UART_CON        JL_UART2->CON0
+#define UART_CON        JL_UART2->CON
 #define UART_BAUD       JL_UART2->BAUD
 
 /* Constants required to setup the hardware. */

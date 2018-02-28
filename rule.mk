@@ -25,8 +25,8 @@ ifeq ($(HOST_OS), windows)
 .PHONY: all archive clean dry_run
  
 all: $(OBJS_LS) $(OBJS_BS) $(OBJS_C) 
-	$(V) $(LD) $(LD_ARGS) $(OUTPUT_EXES) $(OBJS_C) $(OBJS_LS) $(OBJS_BS) $(LIBS) $(SYS_LIBS) $(LINKER) 
-	@$(DIR_OUTPUT)\download.bat $(EXES) $(OBJDUMP) $(OBJCOPY) $(BANKZIP)
+	$(V) $(LD) $(LD_ARGS) $(OUTPUT_ELF) $(OBJS_C) $(OBJS_LS) $(OBJS_BS) $(LIBS) $(SYS_LIBS) $(LINKER) 
+	@$(DIR_OUTPUT)\download.bat $(ELF) $(OBJDUMP) $(OBJCOPY) $(BANKZIP)
 
 archive:$(OBJS_LS) $(OBJS_BS) $(OBJS_C) 
 	@if exist $(LIB_DIR) (rd /s/q $(LIB_DIR))
@@ -40,7 +40,7 @@ clean:
 	@for /r %%i in (*.o) do del %%i
 	@for /r %%i in (*.d) do del %%i
 	@for /r %%i in (*.d.1) do del %%i
-	@if exist $(OUTPUT_EXES) del $(OUTPUT_EXES)
+	@if exist $(OUTPUT_ELF) del $(OUTPUT_ELF)
 	@if exist $(INCLUDE_LIB_PATH)\$(ARCHIVE) del $(INCLUDE_LIB_PATH)\$(ARCHIVE)
  
 $(OBJS_LS):%.o:%.s
@@ -82,9 +82,9 @@ ifeq ($(HOST_OS), linux)
 .PHONY: all archive clean dry_run
  
 all: $(OBJS_LS) $(OBJS_BS) $(OBJS_C) 
-	$(V) $(LD) $(LD_ARGS) $(OUTPUT_EXES) $(OBJS_C) $(OBJS_LS) $(OBJS_BS) $(LIBS) $(SYS_LIBS) $(LINKER)
-	@cd $(DIR_OUTPUT) && $(SHELL) download.sh $(EXES)
-	@echo Make $(OUTPUT_EXES) success!
+	$(V) $(LD) $(LD_ARGS) $(OUTPUT_ELF) $(OBJS_C) $(OBJS_LS) $(OBJS_BS) $(LIBS) $(SYS_LIBS) $(LINKER)
+	@cd $(DIR_OUTPUT) && $(SHELL) download.sh $(ELF)
+	@echo Make $(OUTPUT_ELF) success!
 
 archive:$(OBJS_LS) $(OBJS_BS) $(OBJS_C) 
 	@if [ ! -d $(LIB_DIR) ]; then mkdir $(LIB_DIR); fi
@@ -96,7 +96,7 @@ archive:$(OBJS_LS) $(OBJS_BS) $(OBJS_C)
 
 clean:
 	@ -rm -rf $(INCLUDE_LIB_PATH)/$(ARCHIVE)
-	@ -rm -rf $(OUTPUT_EXES)
+	@ -rm -rf $(OUTPUT_ELF)
 	@ -find -name "*.[od]" | xargs rm -f 
 	@ echo Clean ok...
 

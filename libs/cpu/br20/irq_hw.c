@@ -177,7 +177,7 @@ static void __hw_irq_global_enable(void)
     int tmp;
     __asm__ volatile("mov %0,icfg" : "=r"(tmp));
     tmp |= BIT(8) ;
-    __asm__ volatile("mov icfg,%0\n\tj 0:" : : "r"(tmp));
+    __asm__ volatile("mov icfg,%0\n\tj 0" : : "r"(tmp));
 }
 
 

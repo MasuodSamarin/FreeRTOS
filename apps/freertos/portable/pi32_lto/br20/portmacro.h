@@ -104,8 +104,7 @@ extern volatile uint16_t usCriticalNesting;							\
 /*-----------------------------------------------------------*/
 
 /* Task utilities. */
-extern void vPortYield( void ) __attribute__ ( ( naked ) );
-#define portYIELD()			vPortYield()
+#define portYIELD()			asm volatile ("swi 62")
 #define portNOP()			asm volatile ( "NOP" )
 /*-----------------------------------------------------------*/
 

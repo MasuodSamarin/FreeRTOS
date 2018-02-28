@@ -66,6 +66,11 @@
 #include "comtest2.h"
 #include "PollQ.h"
 
+#include "init.h"
+#define LOG_TAG     "[Main]"
+#define LOG_INFO_ENABLE
+#include "debug.h"
+
 /* Constants required for hardware setup. */
 #define mainALL_BITS_OUTPUT		( ( unsigned char ) 0xff )
 #define mainMAX_FREQUENCY		( ( unsigned char ) 121 )
@@ -122,17 +127,25 @@ int main( void )
 {
 	/* Setup the hardware ready for the demo. */
 	prvSetupHardware();
-	vParTestInitialise();
 
 	/* Start the standard demo application tasks. */
+    log_info("vStartLEDFlashTasks");
 	vStartLEDFlashTasks( mainLED_TASK_PRIORITY );
+
+    log_info("vStartIntegerMathTasks");
 	vStartIntegerMathTasks( tskIDLE_PRIORITY );
+
+    log_info("vAltStartComTestTasks");
 	vAltStartComTestTasks( mainCOM_TEST_PRIORITY, mainCOM_TEST_BAUD_RATE, mainCOM_TEST_LED - 1 );
+
+    log_info("vStartPolledQueueTasks");
 	vStartPolledQueueTasks( mainQUEUE_POLL_PRIORITY );
 
+    log_info("xTaskCreate");
 	/* Start the 'Check' task which is defined in this file. */
 	xTaskCreate( vErrorChecks, "Check", configMINIMAL_STACK_SIZE, NULL, mainCHECK_TASK_PRIORITY, NULL );	
 
+    log_info("vTaskStartScheduler");
 	/* Start the scheduler. */
 	vTaskStartScheduler();
 
@@ -219,8 +232,7 @@ static unsigned long ulLastIdleLoops = 0UL;
 
 static void prvSetupHardware( void )
 {
-    /*-TODO-*/
-
+    system_init_call();
 }
 /*-----------------------------------------------------------*/
 

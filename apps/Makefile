@@ -21,9 +21,9 @@ INCLUDES = \
 -Ifreertos/Common/include \
 
 # Setup paths to source code	
-# export SOURCE_PATH 	= ../../../Source
-# export PORT_PATH 	= ../../../Source/portable/pi32_lto/jlxx/$(RELEASE)
-# export DEMO_PATH 	= ../../Common/Minimal
+export SOURCE_PATH 	= freertos
+export PORT_PATH 	= freertos/portable/pi32_lto/$(RELEASE)
+export DEMO_PATH 	= freertos/Common/Minimal
 
 # Add core code for FreeRTOS base
 
@@ -32,19 +32,22 @@ SRCS_C = \
 cpu/$(RELEASE)/debug_init.c \
 cpu/$(RELEASE)/sys_init.c \
 cpu/$(RELEASE)/uart_hw.c \
+cpu/$(RELEASE)/timer_hw.c \
+serial/serial.c \
+ParTest/ParTest.c \
 main.c
 
-# SRCS_C = \
-# $(SOURCE_PATH)/tasks.c \
-# $(SOURCE_PATH)/list.c \
-# $(SOURCE_PATH)/queue.c \
-# $(SOURCE_PATH)/portable/MemMang/heap_1.c \
-# $(DEMO_PATH)/flash.c \
-# $(DEMO_PATH)/integer.c \
-# $(DEMO_PATH)/comtest.c \
-# $(DEMO_PATH)/PollQ.c \
+SRCS_C += \
+$(SOURCE_PATH)/tasks.c \
+$(SOURCE_PATH)/list.c \
+$(SOURCE_PATH)/queue.c \
+$(SOURCE_PATH)/portable/MemMang/heap_1.c \
+$(DEMO_PATH)/flash.c \
+$(DEMO_PATH)/integer.c \
+$(DEMO_PATH)/comtest.c \
+$(DEMO_PATH)/PollQ.c \
+$(PORT_PATH)/port.c \
 # $(PORT_PATH)/portISR.c \
-# $(PORT_PATH)/port.c \
 
 
 ifeq ($(LE_MODE), CONTROLLER_MODE)
@@ -77,7 +80,5 @@ LIBS = \
 ../include_lib/cpu_lib_$(RELEASE).a  \
 --end-group \
 
-
 -include $(MAKE_RULE)
-
 

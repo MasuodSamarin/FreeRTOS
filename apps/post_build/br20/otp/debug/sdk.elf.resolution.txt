@@ -86,6 +86,7 @@ F:/Git/FreeRTOS/apps/ParTest/ParTest.o
 -r=F:/Git/FreeRTOS/apps/ParTest/ParTest.o,vParTestToggleLED,pl
 F:/Git/FreeRTOS/apps/main.o
 -r=F:/Git/FreeRTOS/apps/main.o,main,pl
+-r=F:/Git/FreeRTOS/apps/main.o,printf,l
 -r=F:/Git/FreeRTOS/apps/main.o,vStartLEDFlashTasks,l
 -r=F:/Git/FreeRTOS/apps/main.o,vStartIntegerMathTasks,l
 -r=F:/Git/FreeRTOS/apps/main.o,vAltStartComTestTasks,l

@@ -47,9 +47,9 @@ export MAKE_RULE = $(abspath .)/rule.mk
 export DEPENDS = $(abspath .)/depend.bat
 
 # - output file
-export EXES= sdk
-OUTPUT_EXES= $(addprefix $(DIR_OUTPUT)$(SLASH), $(EXES))
-export OUTPUT_EXES:= $(addsuffix .exe, $(OUTPUT_EXES))
+export ELF= sdk
+OUTPUT_ELF= $(addprefix $(DIR_OUTPUT)$(SLASH), $(ELF))
+export OUTPUT_ELF:= $(addsuffix .elf, $(OUTPUT_ELF))
 
 BUILD_LD=sdk.ld
 BUILD_MAP=sdk.map
