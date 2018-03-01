@@ -43,6 +43,11 @@ task.h is included from an application file. */
 #include "FreeRTOS.h"
 #include "task.h"
 
+#define LOG_TAG     "[Kernel - heap_1]"
+#define LOG_INFO_ENABLE
+#define LOG_ERROR_ENABLE
+#include "debug.h"
+
 #undef MPU_WRAPPERS_INCLUDED_FROM_API_FILE
 
 #if( configSUPPORT_DYNAMIC_ALLOCATION == 0 )
@@ -80,6 +85,8 @@ static uint8_t *pucAlignedHeap = NULL;
 			/* Byte alignment required. */
 			xWantedSize += ( portBYTE_ALIGNMENT - ( xWantedSize & portBYTE_ALIGNMENT_MASK ) );
 		}
+
+        /* log_info("xWantedSize : 0x%x", xWantedSize ); */
 	}
 	#endif
 
@@ -89,9 +96,12 @@ static uint8_t *pucAlignedHeap = NULL;
 		{
 			/* Ensure the heap starts on a correctly aligned boundary. */
 			pucAlignedHeap = ( uint8_t * ) ( ( ( portPOINTER_SIZE_TYPE ) &ucHeap[ portBYTE_ALIGNMENT ] ) & ( ~( ( portPOINTER_SIZE_TYPE ) portBYTE_ALIGNMENT_MASK ) ) );
+            /* log_info("pucAlignedHeap : 0x%x", pucAlignedHeap ); */
 		}
 
 		/* Check there is enough room left for the allocation. */
+
+        /* log_info("xNextFreeByte : 0x%x / xWantedSize : 0x%x ", xNextFreeByte , xWantedSize ); */
 		if( ( ( xNextFreeByte + xWantedSize ) < configADJUSTED_HEAP_SIZE ) &&
 			( ( xNextFreeByte + xWantedSize ) > xNextFreeByte )	)/* Check for overflow. */
 		{

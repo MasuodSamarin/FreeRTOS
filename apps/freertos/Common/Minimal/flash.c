@@ -49,6 +49,10 @@
 #include "partest.h"
 #include "flash.h"
 
+#define LOG_TAG         "[Task-Flash]"
+#define LOG_INFO_ENABLE
+#include "debug.h"
+
 #define ledSTACK_SIZE		configMINIMAL_STACK_SIZE
 #define ledNUMBER_OF_LEDS	( 3 )
 #define ledFLASH_RATE_BASE	( ( TickType_t ) 333 )
@@ -107,6 +111,7 @@ UBaseType_t uxLED;
 
 	for(;;)
 	{
+        log_info("vLEDFlashTask - run");
 		/* Delay for half the flash period then turn the LED on. */
 		vTaskDelayUntil( &xLastFlashTime, xFlashRate );
 		vParTestToggleLED( uxLED );

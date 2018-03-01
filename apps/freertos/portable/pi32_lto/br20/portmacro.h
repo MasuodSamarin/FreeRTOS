@@ -46,14 +46,14 @@ extern "C" {
 #define portCHAR		char
 #define portFLOAT		float
 #define portDOUBLE		double
-#define portLONG		long
-#define portSHORT		int
-#define portSTACK_TYPE	uint16_t
-#define portBASE_TYPE	short
+#define portLONG		int
+#define portSHORT		short
+#define portSTACK_TYPE	uint32_t
+#define portBASE_TYPE	portLONG
 
 typedef portSTACK_TYPE StackType_t;
-typedef short BaseType_t;
-typedef unsigned short UBaseType_t;
+typedef int BaseType_t;
+typedef unsigned int UBaseType_t;
 
 #if( configUSE_16_BIT_TICKS == 1 )
 	typedef uint16_t TickType_t;
@@ -74,7 +74,7 @@ typedef unsigned short UBaseType_t;
 
 #define portENTER_CRITICAL()													\
 {																				\
-extern volatile uint16_t usCriticalNesting;							\
+extern volatile uint32_t usCriticalNesting;							\
 																				\
 	portDISABLE_INTERRUPTS();													\
 																				\
@@ -86,7 +86,7 @@ extern volatile uint16_t usCriticalNesting;							\
 
 #define portEXIT_CRITICAL()														\
 {																				\
-extern volatile uint16_t usCriticalNesting;							\
+extern volatile uint32_t usCriticalNesting;							\
 																				\
 	if( usCriticalNesting > portNO_CRITICAL_SECTION_NESTING )					\
 	{																			\

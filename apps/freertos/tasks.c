@@ -40,6 +40,13 @@ task.h is included from an application file. */
 #include "timers.h"
 #include "stack_macros.h"
 
+#define LOG_TAG     "[Kernel - task]"
+#define LOG_INFO_ENABLE
+#define LOG_ERROR_ENABLE
+#define LOG_DUMP_ENABLE
+#include "debug.h"
+
+
 /* Lint e961 and e750 are suppressed as a MISRA exception justified because the
 MPU ports require MPU_WRAPPERS_INCLUDED_FROM_API_FILE to be defined for the
 header files above, but not in this file, in order to generate the correct
@@ -771,11 +778,13 @@ static void prvAddNewTaskToReadyList( TCB_t *pxNewTCB ) PRIVILEGED_FUNCTION;
 			/* Allocate space for the stack used by the task being created. */
 			pxStack = ( StackType_t * ) pvPortMalloc( ( ( ( size_t ) usStackDepth ) * sizeof( StackType_t ) ) ); /*lint !e961 MISRA exception as the casts are only redundant for some ports. */
 
+            /* log_info("pxStack %x", pxStack); */
 			if( pxStack != NULL )
 			{
 				/* Allocate space for the TCB. */
 				pxNewTCB = ( TCB_t * ) pvPortMalloc( sizeof( TCB_t ) ); /*lint !e961 MISRA exception as the casts are only redundant for some paths. */
 
+                /* log_info("pxNewTCB %x", pxNewTCB); */
 				if( pxNewTCB != NULL )
 				{
 					/* Store the stack location in the TCB. */
@@ -790,6 +799,7 @@ static void prvAddNewTaskToReadyList( TCB_t *pxNewTCB ) PRIVILEGED_FUNCTION;
 			}
 			else
 			{
+                log_error("pxStack == NULL");
 				pxNewTCB = NULL;
 			}
 		}
@@ -1033,21 +1043,25 @@ static void prvAddNewTaskToReadyList( TCB_t *pxNewTCB )
 	taskENTER_CRITICAL();
 	{
 		uxCurrentNumberOfTasks++;
+        log_info("uxCurrentNumberOfTasks %d", uxCurrentNumberOfTasks);
 		if( pxCurrentTCB == NULL )
 		{
 			/* There are no other tasks, or all the other tasks are in
 			the suspended state - make this the current task. */
 			pxCurrentTCB = pxNewTCB;
 
+            log_info("pxCurrentTCB == NULL");
 			if( uxCurrentNumberOfTasks == ( UBaseType_t ) 1 )
 			{
 				/* This is the first task to be created so do the preliminary
 				initialisation required.  We will not recover if this call
 				fails, but we will report the failure. */
+                log_info("- a");
 				prvInitialiseTaskLists();
 			}
 			else
 			{
+                log_info("- b");
 				mtCOVERAGE_TEST_MARKER();
 			}
 		}
@@ -1056,19 +1070,24 @@ static void prvAddNewTaskToReadyList( TCB_t *pxNewTCB )
 			/* If the scheduler is not already running, make this task the
 			current task if it is the highest priority task to be created
 			so far. */
+            log_info("pxCurrentTCB != NULL");
 			if( xSchedulerRunning == pdFALSE )
 			{
+                log_info("xSchedulerRunning == pdFALSE");
 				if( pxCurrentTCB->uxPriority <= pxNewTCB->uxPriority )
 				{
+                    log_info("- a");
 					pxCurrentTCB = pxNewTCB;
 				}
 				else
 				{
+                    log_info("- b");
 					mtCOVERAGE_TEST_MARKER();
 				}
 			}
 			else
 			{
+                log_info("- c");
 				mtCOVERAGE_TEST_MARKER();
 			}
 		}
@@ -3238,6 +3257,7 @@ static portTASK_FUNCTION( prvIdleTask, pvParameters )
 
 	for( ;; )
 	{
+        log_info("prvIdleTask - run");
 		/* See if any tasks have deleted themselves - if so then the idle task
 		is responsible for freeing the deleted task's TCB and stack. */
 		prvCheckTasksWaitingTermination();

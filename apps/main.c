@@ -68,6 +68,7 @@
 
 #include "init.h"
 #define LOG_TAG     "[Main]"
+#define LOG_ERROR_ENABLE
 #define LOG_INFO_ENABLE
 #include "debug.h"
 
@@ -149,6 +150,7 @@ int main( void )
 	/* Start the scheduler. */
 	vTaskStartScheduler();
 
+    log_error("vTaskStartScheduler - fail");
 	/* As the scheduler has been started the demo applications tasks will be
 	executing and we should never get here! */
 	return 0;
@@ -233,12 +235,21 @@ static unsigned long ulLastIdleLoops = 0UL;
 static void prvSetupHardware( void )
 {
     system_init_call();
+
+    u32 tmp;
+    __asm__ volatile("mov %0,sp" : "=r"(tmp));
+    printf("SP = %08x \n", tmp);
+    __asm__ volatile("mov %0,usp" : "=r"(tmp));
+    printf("USP = %08x \n", tmp);
+    __asm__ volatile("mov %0,ssp" : "=r"(tmp));
+    printf("SSP = %08x \n", tmp);
 }
 /*-----------------------------------------------------------*/
 
 void vApplicationIdleHook( void );
 void vApplicationIdleHook( void )
 {
+    log_info("Idle hook");
 	/* Simple put the CPU into lowpower mode. */
     __asm__ volatile ("idle");
     __asm__ volatile ("nop");
@@ -247,6 +258,30 @@ void vApplicationIdleHook( void )
 }
 /*-----------------------------------------------------------*/
 
+void vApplicationMallocFailedHook( void )
+{
+	/* Called if a call to pvPortMalloc() fails because there is insufficient
+	free memory available in the FreeRTOS heap.  pvPortMalloc() is called
+	internally by FreeRTOS API functions that create tasks, queues or
+	semaphores. */
+	taskDISABLE_INTERRUPTS();
+    log_error("vApplicationMallocFailedHook");
+	for( ;; );
+}
+/*-----------------------------------------------------------*/
+
+void vApplicationStackOverflowHook( TaskHandle_t pxTask, char *pcTaskName )
+{
+    log_error("vApplicationStackOverflowHook");
+    log_error("pxTask : 0x%x", pxTask);
+    log_error("pcTaskName : %s", pcTaskName);
+	/* Run time stack overflow checking is performed if
+	configconfigCHECK_FOR_STACK_OVERFLOW is defined to 1 or 2.  This hook
+	function is called if a stack overflow is detected. */
+	taskDISABLE_INTERRUPTS();
+	for( ;; );
+}
+/*-----------------------------------------------------------*/
 
 
 

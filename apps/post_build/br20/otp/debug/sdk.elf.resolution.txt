@@ -75,7 +75,6 @@ F:/Git/FreeRTOS/apps/serial/serial.o
 -r=F:/Git/FreeRTOS/apps/serial/serial.o,xSerialPutChar,pl
 -r=F:/Git/FreeRTOS/apps/serial/serial.o,xQueueGenericSend,l
 -r=F:/Git/FreeRTOS/apps/serial/serial.o,xQueueGenericSendFromISR,l
--r=F:/Git/FreeRTOS/apps/serial/serial.o,vPortYield,l
 -r=F:/Git/FreeRTOS/apps/serial/serial.o,xQueueReceiveFromISR,l
 -r=F:/Git/FreeRTOS/apps/serial/serial.o,usCriticalNesting,l
 F:/Git/FreeRTOS/apps/ParTest/ParTest.o
@@ -94,6 +93,8 @@ F:/Git/FreeRTOS/apps/main.o
 -r=F:/Git/FreeRTOS/apps/main.o,xTaskCreate,l
 -r=F:/Git/FreeRTOS/apps/main.o,vTaskStartScheduler,l
 -r=F:/Git/FreeRTOS/apps/main.o,vApplicationIdleHook,pl
+-r=F:/Git/FreeRTOS/apps/main.o,vApplicationMallocFailedHook,pl
+-r=F:/Git/FreeRTOS/apps/main.o,vApplicationStackOverflowHook,pl
 -r=F:/Git/FreeRTOS/apps/main.o,vTaskDelay,l
 -r=F:/Git/FreeRTOS/apps/main.o,vParTestToggleLED,l
 -r=F:/Git/FreeRTOS/apps/main.o,xAreIntegerMathsTaskStillRunning,l
@@ -104,10 +105,10 @@ F:/Git/FreeRTOS/apps/freertos/tasks.o
 -r=F:/Git/FreeRTOS/apps/freertos/tasks.o,xTaskCreate,pl
 -r=F:/Git/FreeRTOS/apps/freertos/tasks.o,pvPortMalloc,l
 -r=F:/Git/FreeRTOS/apps/freertos/tasks.o,vPortFree,l
+-r=F:/Git/FreeRTOS/apps/freertos/tasks.o,printf,l
 -r=F:/Git/FreeRTOS/apps/freertos/tasks.o,vTaskDelete,pl
 -r=F:/Git/FreeRTOS/apps/freertos/tasks.o,uxListRemove,l
 -r=F:/Git/FreeRTOS/apps/freertos/tasks.o,vListInsertEnd,l
--r=F:/Git/FreeRTOS/apps/freertos/tasks.o,vPortYield,l
 -r=F:/Git/FreeRTOS/apps/freertos/tasks.o,vTaskDelayUntil,pl
 -r=F:/Git/FreeRTOS/apps/freertos/tasks.o,vTaskSuspendAll,pl
 -r=F:/Git/FreeRTOS/apps/freertos/tasks.o,xTaskResumeAll,pl
@@ -122,6 +123,7 @@ F:/Git/FreeRTOS/apps/freertos/tasks.o
 -r=F:/Git/FreeRTOS/apps/freertos/tasks.o,uxTaskGetNumberOfTasks,pl
 -r=F:/Git/FreeRTOS/apps/freertos/tasks.o,pcTaskGetName,pl
 -r=F:/Git/FreeRTOS/apps/freertos/tasks.o,vTaskSwitchContext,pl
+-r=F:/Git/FreeRTOS/apps/freertos/tasks.o,vApplicationStackOverflowHook,l
 -r=F:/Git/FreeRTOS/apps/freertos/tasks.o,vTaskPlaceOnEventList,pl
 -r=F:/Git/FreeRTOS/apps/freertos/tasks.o,vListInsert,l
 -r=F:/Git/FreeRTOS/apps/freertos/tasks.o,vTaskPlaceOnUnorderedEventList,pl
@@ -140,7 +142,9 @@ F:/Git/FreeRTOS/apps/freertos/tasks.o
 -r=F:/Git/FreeRTOS/apps/freertos/tasks.o,xTaskNotifyStateClear,pl
 -r=F:/Git/FreeRTOS/apps/freertos/tasks.o,vListInitialiseItem,l
 -r=F:/Git/FreeRTOS/apps/freertos/tasks.o,pxPortInitialiseStack,l
+-r=F:/Git/FreeRTOS/apps/freertos/tasks.o,printf_buf,l
 -r=F:/Git/FreeRTOS/apps/freertos/tasks.o,vListInitialise,l
+-r=F:/Git/FreeRTOS/apps/freertos/tasks.o,vApplicationIdleHook,l
 -r=F:/Git/FreeRTOS/apps/freertos/tasks.o,pxCurrentTCB,pl
 -r=F:/Git/FreeRTOS/apps/freertos/tasks.o,usCriticalNesting,l
 F:/Git/FreeRTOS/apps/freertos/list.o
@@ -151,6 +155,7 @@ F:/Git/FreeRTOS/apps/freertos/list.o
 -r=F:/Git/FreeRTOS/apps/freertos/list.o,uxListRemove,pl
 F:/Git/FreeRTOS/apps/freertos/queue.o
 -r=F:/Git/FreeRTOS/apps/freertos/queue.o,xQueueGenericReset,pl
+-r=F:/Git/FreeRTOS/apps/freertos/queue.o,printf,l
 -r=F:/Git/FreeRTOS/apps/freertos/queue.o,xTaskRemoveFromEventList,l
 -r=F:/Git/FreeRTOS/apps/freertos/queue.o,vListInitialise,l
 -r=F:/Git/FreeRTOS/apps/freertos/queue.o,xQueueGenericCreate,pl
@@ -161,7 +166,6 @@ F:/Git/FreeRTOS/apps/freertos/queue.o
 -r=F:/Git/FreeRTOS/apps/freertos/queue.o,xTaskCheckForTimeOut,l
 -r=F:/Git/FreeRTOS/apps/freertos/queue.o,vTaskPlaceOnEventList,l
 -r=F:/Git/FreeRTOS/apps/freertos/queue.o,xTaskResumeAll,l
--r=F:/Git/FreeRTOS/apps/freertos/queue.o,vPortYield,l
 -r=F:/Git/FreeRTOS/apps/freertos/queue.o,xQueueGenericSendFromISR,pl
 -r=F:/Git/FreeRTOS/apps/freertos/queue.o,xQueueGiveFromISR,pl
 -r=F:/Git/FreeRTOS/apps/freertos/queue.o,xQueueReceive,pl
@@ -182,7 +186,9 @@ F:/Git/FreeRTOS/apps/freertos/queue.o
 F:/Git/FreeRTOS/apps/freertos/portable/MemMang/heap_1.o
 -r=F:/Git/FreeRTOS/apps/freertos/portable/MemMang/heap_1.o,pvPortMalloc,pl
 -r=F:/Git/FreeRTOS/apps/freertos/portable/MemMang/heap_1.o,vTaskSuspendAll,l
+-r=F:/Git/FreeRTOS/apps/freertos/portable/MemMang/heap_1.o,printf,l
 -r=F:/Git/FreeRTOS/apps/freertos/portable/MemMang/heap_1.o,xTaskResumeAll,l
+-r=F:/Git/FreeRTOS/apps/freertos/portable/MemMang/heap_1.o,vApplicationMallocFailedHook,l
 -r=F:/Git/FreeRTOS/apps/freertos/portable/MemMang/heap_1.o,vPortFree,pl
 -r=F:/Git/FreeRTOS/apps/freertos/portable/MemMang/heap_1.o,vPortInitialiseBlocks,pl
 -r=F:/Git/FreeRTOS/apps/freertos/portable/MemMang/heap_1.o,xPortGetFreeHeapSize,pl
@@ -190,6 +196,7 @@ F:/Git/FreeRTOS/apps/freertos/Common/Minimal/flash.o
 -r=F:/Git/FreeRTOS/apps/freertos/Common/Minimal/flash.o,vStartLEDFlashTasks,pl
 -r=F:/Git/FreeRTOS/apps/freertos/Common/Minimal/flash.o,xTaskCreate,l
 -r=F:/Git/FreeRTOS/apps/freertos/Common/Minimal/flash.o,xTaskGetTickCount,l
+-r=F:/Git/FreeRTOS/apps/freertos/Common/Minimal/flash.o,printf,l
 -r=F:/Git/FreeRTOS/apps/freertos/Common/Minimal/flash.o,vTaskDelayUntil,l
 -r=F:/Git/FreeRTOS/apps/freertos/Common/Minimal/flash.o,vParTestToggleLED,l
 -r=F:/Git/FreeRTOS/apps/freertos/Common/Minimal/flash.o,usCriticalNesting,l
@@ -197,7 +204,7 @@ F:/Git/FreeRTOS/apps/freertos/Common/Minimal/integer.o
 -r=F:/Git/FreeRTOS/apps/freertos/Common/Minimal/integer.o,vStartIntegerMathTasks,pl
 -r=F:/Git/FreeRTOS/apps/freertos/Common/Minimal/integer.o,xTaskCreate,l
 -r=F:/Git/FreeRTOS/apps/freertos/Common/Minimal/integer.o,xAreIntegerMathsTaskStillRunning,pl
--r=F:/Git/FreeRTOS/apps/freertos/Common/Minimal/integer.o,vPortYield,l
+-r=F:/Git/FreeRTOS/apps/freertos/Common/Minimal/integer.o,usCriticalNesting,l
 F:/Git/FreeRTOS/apps/freertos/Common/Minimal/comtest.o
 -r=F:/Git/FreeRTOS/apps/freertos/Common/Minimal/comtest.o,vAltStartComTestTasks,pl
 -r=F:/Git/FreeRTOS/apps/freertos/Common/Minimal/comtest.o,xSerialPortInitMinimal,l
@@ -222,14 +229,15 @@ F:/Git/FreeRTOS/apps/freertos/Common/Minimal/PollQ.o
 F:/Git/FreeRTOS/apps/freertos/portable/pi32_lto/br20/port.o
 -r=F:/Git/FreeRTOS/apps/freertos/portable/pi32_lto/br20/port.o,pxPortInitialiseStack,pl
 -r=F:/Git/FreeRTOS/apps/freertos/portable/pi32_lto/br20/port.o,xPortStartScheduler,pl
+-r=F:/Git/FreeRTOS/apps/freertos/portable/pi32_lto/br20/port.o,irq_handler_register,l
+-r=F:/Git/FreeRTOS/apps/freertos/portable/pi32_lto/br20/port.o,vPortYield_handler,pl
 -r=F:/Git/FreeRTOS/apps/freertos/portable/pi32_lto/br20/port.o,vPortEndScheduler,pl
--r=F:/Git/FreeRTOS/apps/freertos/portable/pi32_lto/br20/port.o,vPortYield,pl
+-r=F:/Git/FreeRTOS/apps/freertos/portable/pi32_lto/br20/port.o,printf,l
 -r=F:/Git/FreeRTOS/apps/freertos/portable/pi32_lto/br20/port.o,vTaskSwitchContext,l
 -r=F:/Git/FreeRTOS/apps/freertos/portable/pi32_lto/br20/port.o,prvTickISR,pl
 -r=F:/Git/FreeRTOS/apps/freertos/portable/pi32_lto/br20/port.o,xTaskIncrementTick,l
 -r=F:/Git/FreeRTOS/apps/freertos/portable/pi32_lto/br20/port.o,irq_prvTickISR,pl
 -r=F:/Git/FreeRTOS/apps/freertos/portable/pi32_lto/br20/port.o,irq_common_handler,l
--r=F:/Git/FreeRTOS/apps/freertos/portable/pi32_lto/br20/port.o,irq_handler_register,l
 -r=F:/Git/FreeRTOS/apps/freertos/portable/pi32_lto/br20/port.o,usCriticalNesting,pl
 ../include_lib/common_lib.a.llvm.1388.init.c
 -r=../include_lib/common_lib.a.llvm.1388.init.c,system_init_call,pl
