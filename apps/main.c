@@ -133,21 +133,20 @@ int main( void )
     log_info("vStartLEDFlashTasks");
 	vStartLEDFlashTasks( mainLED_TASK_PRIORITY );
 
-    log_info("vStartIntegerMathTasks");
-	vStartIntegerMathTasks( tskIDLE_PRIORITY );
+    /* log_info("vStartIntegerMathTasks"); */
+	/* vStartIntegerMathTasks( tskIDLE_PRIORITY ); */
 
-    log_info("vAltStartComTestTasks");
-	vAltStartComTestTasks( mainCOM_TEST_PRIORITY, mainCOM_TEST_BAUD_RATE, mainCOM_TEST_LED - 1 );
+    /* log_info("vAltStartComTestTasks"); */
+	/* vAltStartComTestTasks( mainCOM_TEST_PRIORITY, mainCOM_TEST_BAUD_RATE, mainCOM_TEST_LED - 1 ); */
 
-    log_info("vStartPolledQueueTasks");
-	vStartPolledQueueTasks( mainQUEUE_POLL_PRIORITY );
+    /* log_info("vStartPolledQueueTasks"); */
+	/* vStartPolledQueueTasks( mainQUEUE_POLL_PRIORITY ); */
 
-    log_info("xTaskCreate");
 	/* Start the 'Check' task which is defined in this file. */
-	xTaskCreate( vErrorChecks, "Check", configMINIMAL_STACK_SIZE, NULL, mainCHECK_TASK_PRIORITY, NULL );	
+	/* xTaskCreate( vErrorChecks, "Check", configMINIMAL_STACK_SIZE, NULL, mainCHECK_TASK_PRIORITY, NULL );	 */
 
-    log_info("vTaskStartScheduler");
 	/* Start the scheduler. */
+    /* log_info("vTaskStartScheduler"); */
 	vTaskStartScheduler();
 
     log_error("vTaskStartScheduler - fail");
@@ -272,13 +271,13 @@ void vApplicationMallocFailedHook( void )
 
 void vApplicationStackOverflowHook( TaskHandle_t pxTask, char *pcTaskName )
 {
-    log_error("vApplicationStackOverflowHook");
-    log_error("pxTask : 0x%x", pxTask);
-    log_error("pcTaskName : %s", pcTaskName);
 	/* Run time stack overflow checking is performed if
 	configconfigCHECK_FOR_STACK_OVERFLOW is defined to 1 or 2.  This hook
 	function is called if a stack overflow is detected. */
 	taskDISABLE_INTERRUPTS();
+    log_error("vApplicationStackOverflowHook");
+    log_error("pxTask : 0x%x", pxTask);
+    log_error("pcTaskName : %s", pcTaskName);
 	for( ;; );
 }
 /*-----------------------------------------------------------*/

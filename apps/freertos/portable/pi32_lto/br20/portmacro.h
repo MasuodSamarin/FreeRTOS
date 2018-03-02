@@ -108,6 +108,10 @@ extern volatile uint32_t usCriticalNesting;							\
 #define portNOP()			asm volatile ( "NOP" )
 /*-----------------------------------------------------------*/
 
+/* MPU specific constants. */
+
+/*-----------------------------------------------------------*/
+
 /* Hardwware specifics. */
 #define portBYTE_ALIGNMENT			4
 #define portSTACK_GROWTH			( -1 )

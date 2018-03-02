@@ -1035,6 +1035,31 @@ UBaseType_t x;
 	}
 }
 /*-----------------------------------------------------------*/
+void debug_sp(void)
+{
+    u32 sp;
+    __asm__ volatile("mov %0,sp" : "=r"(sp));
+    log_info("save sp = 0x%x", sp);
+    log_info("save pxCurrentTCB->pxTopOfStack = 0x%x", pxCurrentTCB->pxTopOfStack);
+
+	asm volatile (  "movl	r0, pxCurrentTCB		\n\t"	\
+					"movh	r0, pxCurrentTCB		\n\t"	\
+					"lw	    r1, r0, 0			    \n\t"	\
+					"sw	    sp, r1, 0			    \n\t"	\
+				);
+
+    log_info("save pxCurrentTCB->pxTopOfStack = 0x%x", pxCurrentTCB->pxTopOfStack);
+
+	asm volatile (	"movl 	r0, pxCurrentTCB 		\n\t"	\
+					"movh	r0, pxCurrentTCB 	 	\n\t"	\
+					"lw     r1, r0, 0  	            \n\t"	\
+					"lw     sp, r1, 0  	            \n\t"	\
+				);
+    __asm__ volatile("mov %0, sp" : "=r"(sp));
+    log_info("restore sp = 0x%x", sp);
+    while(1);
+}
+
 
 static void prvAddNewTaskToReadyList( TCB_t *pxNewTCB )
 {
@@ -1101,6 +1126,8 @@ static void prvAddNewTaskToReadyList( TCB_t *pxNewTCB )
 		}
 		#endif /* configUSE_TRACE_FACILITY */
 		traceTASK_CREATE( pxNewTCB );
+
+        /* debug_sp(); */
 
 		prvAddTaskToReadyList( pxNewTCB );
 

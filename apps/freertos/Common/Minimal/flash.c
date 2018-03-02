@@ -87,6 +87,8 @@ UBaseType_t uxLED;
 	/* The parameters are not used. */
 	( void ) pvParameters;
 
+    log_info("vLEDFlashTask - run");
+    while(1);
 	/* Calculate the LED and flash rate. */
 	portENTER_CRITICAL();
 	{
@@ -111,7 +113,6 @@ UBaseType_t uxLED;
 
 	for(;;)
 	{
-        log_info("vLEDFlashTask - run");
 		/* Delay for half the flash period then turn the LED on. */
 		vTaskDelayUntil( &xLastFlashTime, xFlashRate );
 		vParTestToggleLED( uxLED );

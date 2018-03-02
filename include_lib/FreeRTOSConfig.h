@@ -58,6 +58,7 @@
 //user define 
 #define configCHECK_FOR_STACK_OVERFLOW  1
 #define configUSE_MALLOC_FAILED_HOOK    1
+#define configUSE_LIST_DATA_INTEGRITY_CHECK_BYTES   1
 
 /* Co-routine definitions. */
 #define configUSE_CO_ROUTINES 		0
@@ -86,11 +87,11 @@ to exclude the API function. */
         log_info("[traceTASK_CREATE] pxNewTCB :0x%x / pxNewTCB->pxTopOfStack 0x%x", a, a->pxTopOfStack); \
         log_info_hexdump((u8 *)a->pxTopOfStack, (u32)a - (u32)a->pxTopOfStack)
 
-#define traceMOVED_TASK_TO_READY_STATE( a ) \
-        log_info("[traceMOVED_TASK_TO_READY_STATE] 0x%x", a->xStateListItem); \
+// #define traceMOVED_TASK_TO_READY_STATE( a ) \
+        // log_info("[traceMOVED_TASK_TO_READY_STATE] 0x%x", a->xStateListItem.pvContainer); \
 
-#define tracePOST_MOVED_TASK_TO_READY_STATE( a ) \
-        log_info("[tracePOST_MOVED_TASK_TO_READY_STATE] 0x%x", a->xStateListItem); \
+// #define tracePOST_MOVED_TASK_TO_READY_STATE( a ) \
+        // log_info("[tracePOST_MOVED_TASK_TO_READY_STATE] 0x%x", a->xStateListItem.pvContainer); \
 
 #define configASSERT( a ) \
         do { \

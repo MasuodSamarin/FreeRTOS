@@ -43,6 +43,7 @@
 #include "interrupt.h"
 #define LOG_TAG         "[Port]"
 #define LOG_INFO_ENABLE     
+#define LOG_DUMP_ENABLE     
 #include "debug.h"
 
 /*-----------------------------------------------------------
@@ -95,12 +96,12 @@ volatile uint32_t usCriticalNesting = portINITIAL_CRITICAL_NESTING;
 					"push	{r14-r4}				\n\t"	\
 					"movl	r0, usCriticalNesting	\n\t"	\
 					"movh	r0, usCriticalNesting	\n\t"	\
-					"lw	    r1, r0				    \n\t"	\
+					"lw	    r1, r0, 0			    \n\t"	\
 					"push	{r1}					\n\t"	\
 					"movl	r0, pxCurrentTCB		\n\t"	\
 					"movh	r0, pxCurrentTCB		\n\t"	\
-					"lw	    r1, r0				    \n\t"	\
-                    "sw     sp, r1                  \n\t"   \
+					"lw	    r1, r0, 0			    \n\t"	\
+					"sw	    sp, r1, 0			    \n\t"	\
 				);
 
 /* 
@@ -112,22 +113,27 @@ volatile uint32_t usCriticalNesting = portINITIAL_CRITICAL_NESTING;
  *
  * The bic instruction ensures there are no low power bits set in the status
  * register that is about to be popped from the stack.
+ * r0 = &pxCurrentTCB
+ * r1 = *r0     //r1 = pxCurrentTCB
+ * r1 = *r1     //r1 = pxCurrentTCB->pxTopOfStack
+ * sp = r1      //sp = pxCurrentTCB->pxTopOfStack
  */
+
 #define portRESTORE_CONTEXT()								\
 	asm volatile (	"movl 	r0, pxCurrentTCB 		\n\t"	\
 					"movh	r0, pxCurrentTCB 	 	\n\t"	\
-					"lw     r1, r0 	 	            \n\t"	\
-					"sw	    r1, sp				    \n\t"	\
+					"lw     r1, r0, 0  	            \n\t"	\
+					"lw     sp, r1, 0  	            \n\t"	\
 					"pop	{r1}					\n\t"	\
 					"movl 	r0, usCriticalNesting	\n\t"	\
 					"movh 	r0, usCriticalNesting	\n\t"	\
-					"sw	    r1, r0				    \n\t"	\
+					"sw	    r1, r0, 0			    \n\t"	\
 					"pop	{r14-r4}				\n\t"	\
 					"pops	{rets,macch,maccl,reti,psr}\n\t"	\
 					"pop	{r3-r0}					\n\t"	\
 					"mov    usp, sp					\n\t"	\
 					"mov	sp, ssp					\n\t"	\
-					"rti							\n\t"	\
+					"rti                            \n\t"	\
 				);
 
 /*-----------------------------------------------------------*/
@@ -227,13 +233,36 @@ void vPortYield_handler( void ) __attribute__ ( ( noreturn ) );
 
 BaseType_t xPortStartScheduler( void )
 {
+    log_info("xPortStartScheduler - 1");
     irq_handler_register(IRQ_SOFT0_IDX, vPortYield_handler, 0);
+
 	/* Setup the hardware to generate the tick.  Interrupts are disabled when
 	this function is called. */
+    log_info("xPortStartScheduler - 2");
 	prvSetupTimerInterrupt();
 
 	/* Restore the context of the first task that is going to run. */
 	portRESTORE_CONTEXT();
+
+    u32 tmp;
+    __asm__ volatile("mov %0,r4" : "=r"(tmp));
+    printf("R4= %08x \n", tmp);
+    __asm__ volatile("mov %0,r5" : "=r"(tmp));
+    printf("R5= %08x \n", tmp);
+    __asm__ volatile("mov %0,r6" : "=r"(tmp));
+    printf("R6= %08x \n", tmp);
+    __asm__ volatile("mov %0,r7" : "=r"(tmp));
+    printf("R7= %08x \n", tmp);
+
+    __asm__ volatile("mov %0,sp" : "=r"(tmp));
+    printf("SP = %08x \n", tmp);
+    __asm__ volatile("mov %0,usp" : "=r"(tmp));
+    printf("USP = %08x \n", tmp);
+    __asm__ volatile("mov %0,ssp" : "=r"(tmp));
+    printf("SSP = %08x \n", tmp);
+    __asm__ volatile("mov %0,reti" : "=r"(tmp));
+    printf("RETI= %08x \n", tmp);
+    while(1);
 
 	/* Should not get here as the tasks are now running! */
 	return pdTRUE;
@@ -254,7 +283,7 @@ void vPortEndScheduler( void )
  */
 void vPortYield_handler( void )
 {
-    log_info("@*");     
+    log_info("@");     
 	/* We want the stack of the task being saved to look exactly as if the task
 	was saved during a pre-emptive RTOS tick ISR.  Before calling an ISR the 
 	msp430 places the status register onto the stack.  As this is a function 
@@ -333,6 +362,7 @@ static void prvSetupTimerInterrupt( void )
 
     TIMER_CNT = 0;
     TIMER_PRD = portACLK_FREQUENCY_HZ / configTICK_RATE_HZ;
+    log_info("TIMER_PRD %x", TIMER_PRD);
 
     scale = 0;
     TIMER_CON = (scale << 4) | BIT(0) | BIT(3);

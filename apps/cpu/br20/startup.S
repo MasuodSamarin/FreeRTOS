@@ -17,10 +17,10 @@
          .global _stack
 _stack:
 
-.section .ustack, "a"
-         .space 0x800
-         .global _sys_stack
-_sys_stack:
+; .section .ustack, "a"
+         ; .space 0x800
+         ; .global _sys_stack
+; _sys_stack:
 
 #define hi(x) ((x)>>16)
 #define lo(x) ((x)&0xffff)

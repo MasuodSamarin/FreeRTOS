@@ -343,8 +343,9 @@ void printf_buf(u8 *buf, u32 len)
 {
     u32 i ;
 
-    /* put_u32hex((u32)buf); */
-    /* putchar('\n'); */
+    putchar('\n');
+    puts("Addr : ");
+    put_u32hex((u32)buf);
     for (i = 0 ; i < len ; i++) {
         if (i && (i % 16) == 0) {
             putbyte('\n') ;

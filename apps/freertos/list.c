@@ -30,6 +30,11 @@
 #include "FreeRTOS.h"
 #include "list1.h"
 
+#define LOG_TAG     "[Kernel - list]"
+#define LOG_INFO_ENABLE
+#define LOG_ERROR_ENABLE
+#define LOG_DUMP_ENABLE
+#include "debug.h"
 /*-----------------------------------------------------------
  * PUBLIC LIST API documented in list.h
  *----------------------------------------------------------*/
@@ -79,7 +84,11 @@ ListItem_t * const pxIndex = pxList->pxIndex;
 	the list data structures being overwritten in memory.  They will not catch
 	data errors caused by incorrect configuration or use of FreeRTOS. */
 	listTEST_LIST_INTEGRITY( pxList );
+    /* log_info("listTEST_LIST_INTEGRITY - pxList : 0x%x/0x%x", pxList, pxList->xListIntegrityValue1 ); */
+    /* log_info("listTEST_LIST_INTEGRITY - pxList : 0x%x/0x%x", pxList, pxList->xListIntegrityValue2 ); */
 	listTEST_LIST_ITEM_INTEGRITY( pxNewListItem );
+    /* log_info("listTEST_LIST_INTEGRITY - pxNewListItem : 0x%x/0x%x", pxNewListItem, pxNewListItem->xListItemIntegrityValue1 ); */
+    /* log_info("listTEST_LIST_INTEGRITY - pxNewListItem : 0x%x/0x%x", pxNewListItem, pxNewListItem->xListItemIntegrityValue2 ); */
 
 	/* Insert a new list item into pxList, but rather than sort the list,
 	makes the new list item the last item to be removed by a call to
