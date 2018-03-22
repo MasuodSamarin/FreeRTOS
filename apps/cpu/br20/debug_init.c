@@ -255,7 +255,7 @@ static void app_debug_init(void)
 
         puts("app_initcall - app_debug_init\n");
 
-        /* clock_debug(); */
+        clock_dump();
         debug_reset_source();
     }
 

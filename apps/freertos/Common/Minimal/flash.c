@@ -88,7 +88,7 @@ UBaseType_t uxLED;
 	( void ) pvParameters;
 
     log_info("vLEDFlashTask - run");
-    while(1);
+
 	/* Calculate the LED and flash rate. */
 	portENTER_CRITICAL();
 	{
@@ -111,6 +111,7 @@ UBaseType_t uxLED;
 	vTaskDelayUntil(). */
 	xLastFlashTime = xTaskGetTickCount();
 
+    /* log_info("xLastFlashTime : 0x%x", xLastFlashTime); */
 	for(;;)
 	{
 		/* Delay for half the flash period then turn the LED on. */

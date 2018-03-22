@@ -52,7 +52,7 @@
 
 /* Constants required for hardware setup.  The tick ISR runs off the ACLK, 
 not the MCLK. */
-#define portACLK_FREQUENCY_HZ			( ( TickType_t ) 32768 )
+#define portACLK_FREQUENCY_HZ			( ( TickType_t ) 24000000L)
 #define portINITIAL_CRITICAL_NESTING	( ( uint16_t ) 10 )
 
 /* We require the address of the pxCurrentTCB variable, but don't want to know
@@ -133,6 +133,21 @@ volatile uint32_t usCriticalNesting = portINITIAL_CRITICAL_NESTING;
 					"pop	{r3-r0}					\n\t"	\
 					"mov    usp, sp					\n\t"	\
 					"mov	sp, ssp					\n\t"	\
+					"rti                            \n\t"	\
+				);
+
+#define portRESTORE_CONTEXT_FROM_USER_MODE()								\
+	asm volatile (	"movl 	r0, pxCurrentTCB 		\n\t"	\
+					"movh	r0, pxCurrentTCB 	 	\n\t"	\
+					"lw     r1, r0, 0  	            \n\t"	\
+					"lw     sp, r1, 0  	            \n\t"	\
+					"pop	{r1}					\n\t"	\
+					"movl 	r0, usCriticalNesting	\n\t"	\
+					"movh 	r0, usCriticalNesting	\n\t"	\
+					"sw	    r1, r0, 0			    \n\t"	\
+					"pop	{r14-r4}				\n\t"	\
+					"pops	{rets,macch,maccl,reti,psr}\n\t"	\
+					"pop	{r3-r0}					\n\t"	\
 					"rti                            \n\t"	\
 				);
 
@@ -233,16 +248,14 @@ void vPortYield_handler( void ) __attribute__ ( ( noreturn ) );
 
 BaseType_t xPortStartScheduler( void )
 {
-    log_info("xPortStartScheduler - 1");
     irq_handler_register(IRQ_SOFT0_IDX, vPortYield_handler, 0);
 
 	/* Setup the hardware to generate the tick.  Interrupts are disabled when
 	this function is called. */
-    log_info("xPortStartScheduler - 2");
 	prvSetupTimerInterrupt();
 
 	/* Restore the context of the first task that is going to run. */
-	portRESTORE_CONTEXT();
+	portRESTORE_CONTEXT_FROM_USER_MODE();
 
     u32 tmp;
     __asm__ volatile("mov %0,r4" : "=r"(tmp));
@@ -283,7 +296,7 @@ void vPortEndScheduler( void )
  */
 void vPortYield_handler( void )
 {
-    log_info("@");     
+    /* log_info("@");      */
 	/* We want the stack of the task being saved to look exactly as if the task
 	was saved during a pre-emptive RTOS tick ISR.  Before calling an ISR the 
 	msp430 places the status register onto the stack.  As this is a function 
@@ -348,7 +361,7 @@ void vPortYield_handler( void )
 	void prvTickISR( void );
 	void prvTickISR( void )
 	{
-        log_info("*");     
+        TIMER_CON |= BIT(14);
 		xTaskIncrementTick();
 	}
     IRQ_REGISTER(TIMER_VETOR, prvTickISR);
@@ -362,7 +375,7 @@ static void prvSetupTimerInterrupt( void )
 
     TIMER_CNT = 0;
     TIMER_PRD = portACLK_FREQUENCY_HZ / configTICK_RATE_HZ;
-    log_info("TIMER_PRD %x", TIMER_PRD);
+    /* log_info("TIMER_PRD %x", TIMER_PRD); */
 
     scale = 0;
     TIMER_CON = (scale << 4) | BIT(0) | BIT(3);

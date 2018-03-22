@@ -248,7 +248,7 @@ static void prvSetupHardware( void )
 void vApplicationIdleHook( void );
 void vApplicationIdleHook( void )
 {
-    log_info("Idle hook");
+    /* log_info("Idle hook"); */
 	/* Simple put the CPU into lowpower mode. */
     __asm__ volatile ("idle");
     __asm__ volatile ("nop");

@@ -87,6 +87,12 @@ to exclude the API function. */
         log_info("[traceTASK_CREATE] pxNewTCB :0x%x / pxNewTCB->pxTopOfStack 0x%x", a, a->pxTopOfStack); \
         log_info_hexdump((u8 *)a->pxTopOfStack, (u32)a - (u32)a->pxTopOfStack)
 
+#define traceTASK_DELAY_UNTIL( a ) \
+    log_info("[traceTASK_DELAY_UNTIL] : 0x%x", a)
+
+// #define traceTASK_INCREMENT_TICK( a ) \
+    // log_info("[traceTASK_INCREMENT_TICK] : 0x%x", a)
+
 // #define traceMOVED_TASK_TO_READY_STATE( a ) \
         // log_info("[traceMOVED_TASK_TO_READY_STATE] 0x%x", a->xStateListItem.pvContainer); \
 

@@ -3284,7 +3284,7 @@ static portTASK_FUNCTION( prvIdleTask, pvParameters )
 
 	for( ;; )
 	{
-        log_info("prvIdleTask - run");
+        /* log_info("prvIdleTask - run"); */
 		/* See if any tasks have deleted themselves - if so then the idle task
 		is responsible for freeing the deleted task's TCB and stack. */
 		prvCheckTasksWaitingTermination();
