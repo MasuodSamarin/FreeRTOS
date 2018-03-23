@@ -29,7 +29,7 @@ ${FIND} ${DIR} -path "${DIR}/${TARGET_DIR}/cpu/*" ! -path "${DIR}/${TARGET_DIR}/
     -path "${DIR}/${TARGET_DIR}/include/*" ! -path "${DIR}/${TARGET_DIR}/include/${TARGET_CPU}*" -prune -o \
     -path "${DIR}/include_lib/cpu/*" ! -path "${DIR}/include_lib/cpu/${TARGET_CPU}*" -prune -o \
     -path "${DIR}/libs/cpu/*" ! -path "${DIR}/libs/cpu/${TARGET_CPU}*" -prune -o \
-    -path "${DIR}/{TARGET_DIR}/freertos/Common/Full*" -prune -o \
+    -path "${DIR}/${TARGET_DIR}/freertos/Common/Full*" -prune -o \
     -path "${DIR}/tools*" -prune -o \
     -path "${DIR}/undodir*" -prune -o \
     -name "*.[Sch]" -print > cscope.files
@@ -39,8 +39,8 @@ export FIND_EXCEPT="${FIND} . -path "*${DIR}/${TARGET_DIR}/cpu/*" ! -path "*${DI
     -path "*${DIR}/${TARGET_DIR}/include/*" ! -path "*${DIR}/${TARGET_DIR}/include/${TARGET_CPU}*" -prune -o \
     -path "*${DIR}/include_lib/cpu/*" ! -path "*${DIR}/include_lib/cpu/${TARGET_CPU}*" -prune -o \
     -path "*${DIR}/libs/cpu/*" ! -path "*${DIR}/libs/cpu/${TARGET_CPU}*" -prune -o \
+    -path "*${DIR}/${TARGET_DIR}/freertos/Common/Full*" -prune -o \
     -path "*${DIR}/${TARGET_DIR}/post_build/*" ! -path "*${DIR}/${TARGET_DIR}/post_build/${TARGET_CPU}*" -prune -o \
-    -path "${DIR}/{TARGET_DIR}/freertos/Common/Full*" -prune -o \
     -path "*${DIR}/tools*" -prune -o \
     -path "*${DIR}/undodir*" -prune -o"
 

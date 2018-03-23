@@ -80,15 +80,15 @@ to exclude the API function. */
 // The following macro implementing the stub in kernel
 //
 #define traceMALLOC( a, b ) \
-    log_info("[traceMALLOC] MALLOC pvAddress : 0x%x / uiSize : 0x%x", a, b)
+    // log_info("[traceMALLOC] MALLOC pvAddress : 0x%x / uiSize : 0x%x", a, b)
 
 #define traceTASK_CREATE( a ) \
-        log_info("[traceTASK_CREATE] pcName %s", a->pcTaskName); \
-        log_info("[traceTASK_CREATE] pxNewTCB :0x%x / pxNewTCB->pxTopOfStack 0x%x", a, a->pxTopOfStack); \
-        log_info_hexdump((u8 *)a->pxTopOfStack, (u32)a - (u32)a->pxTopOfStack)
+        // log_info("[traceTASK_CREATE] pcName %s", a->pcTaskName); \
+        // log_info("[traceTASK_CREATE] pxNewTCB :0x%x / pxNewTCB->pxTopOfStack 0x%x", a, a->pxTopOfStack); \
+        // log_info_hexdump((u8 *)a->pxTopOfStack, (u32)a - (u32)a->pxTopOfStack)
 
 #define traceTASK_DELAY_UNTIL( a ) \
-    log_info("[traceTASK_DELAY_UNTIL] : 0x%x", a)
+    log_error("[traceTASK_DELAY_UNTIL] : 0x%x", a)
 
 // #define traceTASK_INCREMENT_TICK( a ) \
     // log_info("[traceTASK_INCREMENT_TICK] : 0x%x", a)

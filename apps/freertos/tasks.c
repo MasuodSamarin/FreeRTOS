@@ -41,7 +41,7 @@ task.h is included from an application file. */
 #include "stack_macros.h"
 
 #define LOG_TAG     "[Kernel - task]"
-#define LOG_INFO_ENABLE
+/* #define LOG_INFO_ENABLE */
 #define LOG_ERROR_ENABLE
 #define LOG_DUMP_ENABLE
 #include "debug.h"
@@ -1267,6 +1267,7 @@ static void prvAddNewTaskToReadyList( TCB_t *pxNewTCB )
 			/* Generate the tick time at which the task wants to wake. */
 			xTimeToWake = *pxPreviousWakeTime + xTimeIncrement;
 
+            log_error("xTimeToWake : 0x%x / pxPreviousWakeTime : 0x%x / xConstTickCount : 0x%x", xTimeToWake, *pxPreviousWakeTime, xConstTickCount );
 			if( xConstTickCount < *pxPreviousWakeTime )
 			{
 				/* The tick count has overflowed since this function was

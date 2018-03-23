@@ -65,8 +65,8 @@ typedef unsigned int UBaseType_t;
 /*-----------------------------------------------------------*/
 
 /* Interrupt control macros. */
-#define portDISABLE_INTERRUPTS()	asm volatile ( "cli" ); asm volatile ( "NOP" )
-#define portENABLE_INTERRUPTS()		asm volatile ( "sti" ); asm volatile ( "NOP" )
+#define portDISABLE_INTERRUPTS()	asm volatile ( "cli" ); 
+#define portENABLE_INTERRUPTS()		asm volatile ( "sti" ); 
 /*-----------------------------------------------------------*/
 
 /* Critical section control macros. */

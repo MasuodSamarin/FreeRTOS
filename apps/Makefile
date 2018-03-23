@@ -16,16 +16,6 @@ INCLUDES = \
 -I../include_lib/cpu \
 -I../include_lib/cpu/$(RELEASE) \
 -I../include_lib/btstack \
--Ifreertos/include \
--Ifreertos/portable/pi32_lto/$(RELEASE) \
--Ifreertos/Common/include \
-
-# Setup paths to source code	
-export SOURCE_PATH 	= freertos
-export PORT_PATH 	= freertos/portable/pi32_lto/$(RELEASE)
-export DEMO_PATH 	= freertos/Common/Minimal
-
-# Add core code for FreeRTOS base
 
 # Add application code
 SRCS_C = \
@@ -37,6 +27,17 @@ serial/serial.c \
 ParTest/ParTest.c \
 main.c
 
+# Setup paths to source code	
+export SOURCE_PATH 	= freertos
+export PORT_PATH 	= freertos/portable/pi32_lto/$(RELEASE)
+export DEMO_PATH 	= freertos/Common/Minimal
+
+INCLUDES += \
+-Ifreertos/include \
+-Ifreertos/portable/pi32_lto/$(RELEASE) \
+-Ifreertos/Common/include \
+
+# Add core code for FreeRTOS base
 SRCS_C += \
 $(SOURCE_PATH)/tasks.c \
 $(SOURCE_PATH)/list.c \

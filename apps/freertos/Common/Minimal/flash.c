@@ -87,7 +87,6 @@ UBaseType_t uxLED;
 	/* The parameters are not used. */
 	( void ) pvParameters;
 
-    log_info("vLEDFlashTask - run");
 
 	/* Calculate the LED and flash rate. */
 	portENTER_CRITICAL();
@@ -100,6 +99,7 @@ UBaseType_t uxLED;
 	}
 	portEXIT_CRITICAL();
 
+
 	xFlashRate = ledFLASH_RATE_BASE + ( ledFLASH_RATE_BASE * ( TickType_t ) uxLED );
 	xFlashRate /= portTICK_PERIOD_MS;
 
@@ -111,15 +111,19 @@ UBaseType_t uxLED;
 	vTaskDelayUntil(). */
 	xLastFlashTime = xTaskGetTickCount();
 
-    /* log_info("xLastFlashTime : 0x%x", xLastFlashTime); */
+    log_info("vLEDFlashTask %d - run / Rate : %d", uxLED, xFlashRate);
 	for(;;)
 	{
 		/* Delay for half the flash period then turn the LED on. */
+        log_info("vLEDFlashTask %d - run1", uxLED);
 		vTaskDelayUntil( &xLastFlashTime, xFlashRate );
+        log_info("vLEDFlashTask %d - run2", uxLED);
 		vParTestToggleLED( uxLED );
 
 		/* Delay for half the flash period then turn the LED off. */
+        log_info("vLEDFlashTask %d - run3", uxLED);
 		vTaskDelayUntil( &xLastFlashTime, xFlashRate );
+        log_info("vLEDFlashTask %d - run4", uxLED);
 		vParTestToggleLED( uxLED );
 	}
 } /*lint !e715 !e818 !e830 Function definition must be standard for task creation. */
