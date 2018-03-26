@@ -1081,12 +1081,10 @@ static void prvAddNewTaskToReadyList( TCB_t *pxNewTCB )
 				/* This is the first task to be created so do the preliminary
 				initialisation required.  We will not recover if this call
 				fails, but we will report the failure. */
-                log_info("- a");
 				prvInitialiseTaskLists();
 			}
 			else
 			{
-                log_info("- b");
 				mtCOVERAGE_TEST_MARKER();
 			}
 		}
@@ -1101,12 +1099,10 @@ static void prvAddNewTaskToReadyList( TCB_t *pxNewTCB )
                 log_info("xSchedulerRunning == pdFALSE");
 				if( pxCurrentTCB->uxPriority <= pxNewTCB->uxPriority )
 				{
-                    log_info("- a");
 					pxCurrentTCB = pxNewTCB;
 				}
 				else
 				{
-                    log_info("- b");
 					mtCOVERAGE_TEST_MARKER();
 				}
 			}
@@ -1321,7 +1317,9 @@ static void prvAddNewTaskToReadyList( TCB_t *pxNewTCB )
 		have put ourselves to sleep. */
 		if( xAlreadyYielded == pdFALSE )
 		{
+            log_error("portYIELD_WITHIN_API - pre");
 			portYIELD_WITHIN_API();
+            log_error("portYIELD_WITHIN_API - post");
 		}
 		else
 		{
@@ -2085,6 +2083,7 @@ void vTaskSuspendAll( void )
 	post in the FreeRTOS support forum before reporting this as a bug! -
 	http://goo.gl/wu4acr */
 	++uxSchedulerSuspended;
+    /* log_error("vTaskSuspendAll : 0x%x", uxSchedulerSuspended); */
 }
 /*----------------------------------------------------------*/
 

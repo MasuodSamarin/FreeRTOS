@@ -41,6 +41,12 @@
 /* Demo program include files. */
 #include "integer.h"
 
+#define LOG_TAG     "[Minimal - integer]"
+/* #define LOG_INFO_ENABLE */
+#define LOG_ERROR_ENABLE
+#define LOG_DUMP_ENABLE
+#include "debug.h"
+
 /* The constants used in the calculation. */
 #define intgCONST1				( ( long ) 123 )
 #define intgCONST2				( ( long ) 234567 )

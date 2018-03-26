@@ -104,7 +104,7 @@ extern volatile uint32_t usCriticalNesting;							\
 /*-----------------------------------------------------------*/
 
 /* Task utilities. */
-#define portYIELD()			asm volatile ("swi 62")
+#define portYIELD()			asm volatile ( "swi 62" )
 #define portNOP()			asm volatile ( "NOP" )
 /*-----------------------------------------------------------*/
 

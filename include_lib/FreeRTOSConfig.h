@@ -99,6 +99,9 @@ to exclude the API function. */
 // #define tracePOST_MOVED_TASK_TO_READY_STATE( a ) \
         // log_info("[tracePOST_MOVED_TASK_TO_READY_STATE] 0x%x", a->xStateListItem.pvContainer); \
 
+// #define mtCOVERAGE_TEST_MARKER() \
+    // log_error("[mtCOVERAGE_TEST_MARKER]")
+
 #define configASSERT( a ) \
         do { \
             if(! ( a ) ){ \

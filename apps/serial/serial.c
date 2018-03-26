@@ -46,6 +46,12 @@
 #include "irq_interface.h"
 #include "sdk_cfg.h"
 
+#define LOG_TAG     "[serial]"
+/* #define LOG_INFO_ENABLE */
+#define LOG_ERROR_ENABLE
+#define LOG_DUMP_ENABLE
+#include "debug.h"
+
 /* setup the hardware mapping. */
 #define UART_BUF        JL_UART2->BUF
 #define UART_CON        JL_UART2->CON

@@ -296,7 +296,6 @@ void vPortEndScheduler( void )
  */
 void vPortYield_handler( void )
 {
-    /* log_info("@");      */
 	/* We want the stack of the task being saved to look exactly as if the task
 	was saved during a pre-emptive RTOS tick ISR.  Before calling an ISR the 
 	msp430 places the status register onto the stack.  As this is a function 

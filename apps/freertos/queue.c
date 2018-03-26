@@ -37,9 +37,16 @@ task.h is included from an application file. */
 #include "task.h"
 #include "queue.h"
 
+#define LOG_TAG     "[Kernel - queue]"
+/* #define LOG_INFO_ENABLE */
+#define LOG_ERROR_ENABLE
+#define LOG_DUMP_ENABLE
+#include "debug.h"
+
 #if ( configUSE_CO_ROUTINES == 1 )
 	#include "croutine.h"
 #endif
+
 
 /* Lint e961 and e750 are suppressed as a MISRA exception justified because the
 MPU ports require MPU_WRAPPERS_INCLUDED_FROM_API_FILE to be defined for the
