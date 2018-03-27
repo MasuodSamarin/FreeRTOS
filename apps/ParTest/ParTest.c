@@ -55,7 +55,7 @@
 
 /* Constants required to access the "LED's".  The LED segments are turned on
 and off to generate '*' characters. */
-#define partstNUM_LEDS			( ( unsigned char ) 6 )
+#define partstNUM_LEDS			( ( unsigned char ) 8 )
 
 /*
  * Toggle the single genuine built in LED.
@@ -103,7 +103,6 @@ void vParTestToggleLED( unsigned portBASE_TYPE uxLED )
 	{
 		vTaskSuspendAll();
 		{
-            log_info("uxLED : %d", uxLED);
             IO_DEBUG_TOGGLE(A, uxLED);
 		}
 		xTaskResumeAll();

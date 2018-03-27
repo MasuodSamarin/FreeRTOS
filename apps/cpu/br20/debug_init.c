@@ -178,7 +178,7 @@ static void __mpu_enable(void)
 
 static void sys_tick_500ms(void)
 {
-    puts(".");
+    /* puts("."); */
     /* JL_SYSTEM->WDT_CON |= BIT(6); */
     /* printf("LSB clock : %d\n", TIMER_CLK); */
 }

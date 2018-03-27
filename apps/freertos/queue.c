@@ -38,7 +38,7 @@ task.h is included from an application file. */
 #include "queue.h"
 
 #define LOG_TAG     "[Kernel - queue]"
-/* #define LOG_INFO_ENABLE */
+#define LOG_INFO_ENABLE
 #define LOG_ERROR_ENABLE
 #define LOG_DUMP_ENABLE
 #include "debug.h"

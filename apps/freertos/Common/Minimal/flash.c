@@ -115,15 +115,15 @@ UBaseType_t uxLED;
 	for(;;)
 	{
 		/* Delay for half the flash period then turn the LED on. */
-        log_info("vLEDFlashTask %d - run1", uxLED);
+        /* log_info("vLEDFlashTask %d - run1", uxLED); */
 		vTaskDelayUntil( &xLastFlashTime, xFlashRate );
-        log_info("vLEDFlashTask %d - run2", uxLED);
+        /* log_info("vLEDFlashTask %d - run2", uxLED); */
 		vParTestToggleLED( uxLED );
 
 		/* Delay for half the flash period then turn the LED off. */
-        log_info("vLEDFlashTask %d - run3", uxLED);
+        /* log_info("vLEDFlashTask %d - run3", uxLED); */
 		vTaskDelayUntil( &xLastFlashTime, xFlashRate );
-        log_info("vLEDFlashTask %d - run4", uxLED);
+        /* log_info("vLEDFlashTask %d - run4", uxLED); */
 		vParTestToggleLED( uxLED );
 	}
 } /*lint !e715 !e818 !e830 Function definition must be standard for task creation. */

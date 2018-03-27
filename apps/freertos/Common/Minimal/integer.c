@@ -42,7 +42,7 @@
 #include "integer.h"
 
 #define LOG_TAG     "[Minimal - integer]"
-/* #define LOG_INFO_ENABLE */
+#define LOG_INFO_ENABLE
 #define LOG_ERROR_ENABLE
 #define LOG_DUMP_ENABLE
 #include "debug.h"
@@ -96,6 +96,7 @@ volatile BaseType_t *pxTaskHasExecuted;
 	within each port. */
 	pxTaskHasExecuted = ( volatile BaseType_t * ) pvParameters;
 
+    log_info("vCompeteingIntMathTask %s ", (*pxTaskHasExecuted) ? "pdTRUE" : "pdFALSE");
 	/* Keep performing a calculation and checking the result against a constant. */
 	for( ;; )
 	{

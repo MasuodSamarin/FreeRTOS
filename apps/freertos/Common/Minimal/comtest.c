@@ -67,6 +67,11 @@
 #include "comtest.h"
 #include "partest.h"
 
+#define LOG_TAG         "[Task-comtest]"
+#define LOG_INFO_ENABLE
+#define LOG_ERROR_ENABLE
+#include "debug.h"
+
 #define comSTACK_SIZE				configMINIMAL_STACK_SIZE
 #define comTX_LED_OFFSET			( 0 )
 #define comRX_LED_OFFSET			( 1 )
@@ -139,8 +144,10 @@ TickType_t xTimeToWait;
 		comLAST_BYTE. */
 		for( cByteToSend = comFIRST_BYTE; cByteToSend <= comLAST_BYTE; cByteToSend++ )
 		{
+            /* log_info("vComTxTask : %x", cByteToSend); */
 			if( xSerialPutChar( xPort, cByteToSend, comNO_BLOCK ) == pdPASS )
 			{
+                /* log_info("vComTxTask : %d %d", uxBaseLED, comTX_LED_OFFSET  ); */
 				vParTestToggleLED( uxBaseLED + comTX_LED_OFFSET );
 			}
 		}
@@ -188,12 +195,15 @@ BaseType_t xResyncRequired = pdFALSE, xErrorOccurred = pdFALSE;
 				/* Was this the byte we were expecting?  If so, toggle the LED,
 				otherwise we are out on sync and should break out of the loop
 				until the expected character sequence is about to restart. */
+                /* log_info("vComRxTask : %c / %c", cByteRxed, cExpectedByte ); */
 				if( cByteRxed == cExpectedByte )
 				{
+                    /* log_info("vComRxTask LED : %d %d", uxBaseLED , comRX_LED_OFFSET ); */
 					vParTestToggleLED( uxBaseLED + comRX_LED_OFFSET );
 				}
 				else
 				{
+                    log_error("vComRxTask : %c / %c", cByteRxed, cExpectedByte );
 					xResyncRequired = pdTRUE;
 					break; /*lint !e960 Non-switch break allowed. */
 				}

@@ -79,7 +79,7 @@
 /* Constants that define the LED's used by the various tasks. [in this case
 the '*' characters on the LCD represent LED's] */
 #define mainCHECK_LED			( 4 )
-#define mainCOM_TEST_LED		( 10 )
+#define mainCOM_TEST_LED		( 7 )
 
 /* Demo task priorities. */
 #define mainCHECK_TASK_PRIORITY			( tskIDLE_PRIORITY + 3 )
@@ -88,7 +88,7 @@ the '*' characters on the LCD represent LED's] */
 #define mainLED_TASK_PRIORITY			( tskIDLE_PRIORITY + 1 )
 
 /* Baud rate used by the COM test tasks. */
-#define mainCOM_TEST_BAUD_RATE			( ( unsigned long ) 19200 )
+#define mainCOM_TEST_BAUD_RATE			( ( unsigned long ) 460800L )
 
 /* The frequency at which the 'Check' tasks executes.  See the comments at the 
 top of the page.  When the system is operating error free the 'Check' task
@@ -133,20 +133,20 @@ int main( void )
     log_info("vStartLEDFlashTasks");
 	vStartLEDFlashTasks( mainLED_TASK_PRIORITY );
 
-    /* log_info("vStartIntegerMathTasks"); */
-	/* vStartIntegerMathTasks( tskIDLE_PRIORITY ); */
+    log_info("vStartIntegerMathTasks");
+    vStartIntegerMathTasks( tskIDLE_PRIORITY );
 
-    /* log_info("vAltStartComTestTasks"); */
-	/* vAltStartComTestTasks( mainCOM_TEST_PRIORITY, mainCOM_TEST_BAUD_RATE, mainCOM_TEST_LED - 1 ); */
+    log_info("vAltStartComTestTasks");
+    vAltStartComTestTasks( mainCOM_TEST_PRIORITY, mainCOM_TEST_BAUD_RATE, mainCOM_TEST_LED - 1 );
 
     /* log_info("vStartPolledQueueTasks"); */
 	/* vStartPolledQueueTasks( mainQUEUE_POLL_PRIORITY ); */
 
 	/* Start the 'Check' task which is defined in this file. */
-	/* xTaskCreate( vErrorChecks, "Check", configMINIMAL_STACK_SIZE, NULL, mainCHECK_TASK_PRIORITY, NULL );	 */
+    xTaskCreate( vErrorChecks, "Check", configMINIMAL_STACK_SIZE, NULL, mainCHECK_TASK_PRIORITY, NULL );	
 
 	/* Start the scheduler. */
-    /* log_info("vTaskStartScheduler"); */
+    log_info("vTaskStartScheduler");
 	vTaskStartScheduler();
 
     log_error("vTaskStartScheduler - fail");
@@ -161,6 +161,7 @@ static void vErrorChecks( void *pvParameters )
 static volatile unsigned long ulDummyVariable = 3UL;
 TickType_t xDelayPeriod = mainNO_ERROR_CHECK_DELAY;
 
+    log_info("vErrorChecks - run");
 	/* Cycle for ever, delaying then checking all the other tasks are still
 	operating without error. */
 	for( ;; )
@@ -185,6 +186,7 @@ TickType_t xDelayPeriod = mainNO_ERROR_CHECK_DELAY;
 			period - which has the effect of increasing the frequency of the
 			LED toggle. */
 			xDelayPeriod = mainERROR_CHECK_DELAY;
+            log_error("vErrorChecks - xDelayPeriod : 0x%x", xDelayPeriod);
 		}
 
 		/* Flash! */
@@ -215,10 +217,10 @@ static unsigned long ulLastIdleLoops = 0UL;
 		sNoErrorFound = pdFALSE;
 	}
 	
-	if( xArePollingQueuesStillRunning() != pdTRUE )
-	{
-		sNoErrorFound = pdFALSE;
-	}
+	/* if( xArePollingQueuesStillRunning() != pdTRUE ) */
+	/* { */
+		/* sNoErrorFound = pdFALSE; */
+	/* } */
 
 	if( ulLastIdleLoops == ulIdleLoops )
 	{

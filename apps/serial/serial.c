@@ -47,18 +47,32 @@
 #include "sdk_cfg.h"
 
 #define LOG_TAG     "[serial]"
-/* #define LOG_INFO_ENABLE */
+#define LOG_INFO_ENABLE
 #define LOG_ERROR_ENABLE
 #define LOG_DUMP_ENABLE
 #include "debug.h"
 
 /* setup the hardware mapping. */
-#define UART_BUF        JL_UART2->BUF
-#define UART_CON        JL_UART2->CON
-#define UART_BAUD       JL_UART2->BAUD
+#define UART_BUF            JL_UART1->BUF
+#define UART_CON            JL_UART1->CON0
+#define UART_BAUD           JL_UART1->BAUD
+#define UART_IRQ_INDEX      IRQ_UART1_IDX
+
+#define UART_PORT_INIT()    \
+    JL_IOMAP->CON1 &= ~(BIT(3) | BIT(2)); \
+    JL_PORTB->OUT |= BIT(0) ;\
+    JL_PORTB->DIR |= BIT(1) ;\
+    JL_PORTB->DIR &= ~BIT(0)
 
 /* Constants required to setup the hardware. */
-#define serTX_AND_RX			( ( unsigned char ) 0x03 )
+#define UART_RX_IE_ENABLE       BIT(3)
+#define UART_RX_PENDING         BIT(14)
+#define UART_RX_CLR_PENDING     BIT(12)
+
+#define UART_TX_IE_ENABLE       BIT(2)
+#define UART_TX_PENDING         BIT(15)
+#define UART_TX_CLR_PENDING     BIT(13)
+
 
 /* Misc. constants. */
 #define serNO_BLOCK				( ( TickType_t ) 0 )
@@ -72,7 +86,8 @@ static QueueHandle_t xRxedChars;
 /* The queue used to hold characters waiting transmission. */
 static QueueHandle_t xCharsForTx; 
 
-static volatile short sTHREEmpty;
+static volatile portBASE_TYPE xQueueEmpty = pdTRUE;
+
 
 /* Interrupt service routines. */
 static void vRxISR( void );
@@ -85,18 +100,18 @@ static void uart_irq_handle(void)
     u8 value;
 
     //RX pending
-    if ((UART_CON & BIT(3)) && (UART_CON & BIT(14))) { 
-        UART_CON |= BIT(12); //clr rx pd
+    if ((UART_CON & UART_RX_IE_ENABLE) && (UART_CON & UART_RX_PENDING)) { 
         vRxISR();
+        UART_CON |= UART_RX_CLR_PENDING; //clr rx pd
     }
 
     //TX pending
-    if ((UART_CON & BIT(2)) && (UART_CON & BIT(15))) { 
-        UART_CON |= BIT(13); //clr rx pd
+    if ((UART_CON & UART_TX_IE_ENABLE) && (UART_CON & UART_TX_PENDING)) { 
         vTxISR();
+        UART_CON |= UART_TX_CLR_PENDING; //clr tx pd
     }
 }
-IRQ_REGISTER(IRQ_UART1_IDX, uart_irq_handle);
+IRQ_REGISTER(UART_IRQ_INDEX, uart_irq_handle);
 
 xComPortHandle xSerialPortInitMinimal( unsigned long ulWantedBaud, unsigned portBASE_TYPE uxQueueLength )
 {
@@ -110,13 +125,11 @@ xComPortHandle xSerialPortInitMinimal( unsigned long ulWantedBaud, unsigned port
 		/* Create the queues used by the com test task. */
 		xRxedChars = xQueueCreate( uxQueueLength, ( unsigned portBASE_TYPE ) sizeof( signed char ) );
 		xCharsForTx = xQueueCreate( uxQueueLength, ( unsigned portBASE_TYPE ) sizeof( signed char ) );
-        JL_IOMAP->CON1 &= ~(BIT(15) | BIT(14));
-        JL_PORTA->OUT |= BIT(3) ;
-        JL_PORTA->DIR |= BIT(4) ;
-        JL_PORTA->DIR &= ~BIT(3) ;
+        UART_PORT_INIT();
         UART_BAUD   = (APP_UART_CLK / ulWantedBaud) / 4 - 1;
-        IRQ_REQUEST(IRQ_UART1_IDX, uart_irq_handle, 3);
+        IRQ_REQUEST(UART_IRQ_INDEX, uart_irq_handle, 3);
         UART_CON    = BIT(13) | BIT(12) | BIT(0) | BIT(3) | BIT(2);       //Tx_pending/Rx_pending/Enable/Rx_IE/Tx_IE
+        xQueueEmpty = pdTRUE; //first tx empty
 	}
 	portEXIT_CRITICAL();
 	
@@ -149,44 +162,30 @@ signed portBASE_TYPE xReturn;
 	/* Transmit a character. */
 
 	portENTER_CRITICAL();
-	{
-		if( sTHREEmpty == pdTRUE )
-		{
-			/* If sTHREEmpty is true then the UART Tx ISR has indicated that 
-			there are no characters queued to be transmitted - so we can
-			write the character directly to the shift Tx register. */
-			sTHREEmpty = pdFALSE;
-			UART_BUF = cOutChar;
+    {
+        if ( xQueueEmpty == pdTRUE )
+        {
+            UART_BUF = cOutChar;
+            __asm__ volatile("csync");
 			xReturn = pdPASS;
-		}
-		else
-		{
-			/* sTHREEmpty is false, so there are still characters waiting to be
-			transmitted.  We have to queue this character so it gets 
-			transmitted	in turn. */
-
-			/* Return false if after the block time there is no room on the Tx 
-			queue.  It is ok to block inside a critical section as each task
-			maintains it's own critical section status. */
-			xReturn = xQueueSend( xCharsForTx, &cOutChar, xBlockTime );
-
-			/* Depending on queue sizing and task prioritisation:  While we 
-			were blocked waiting to post on the queue interrupts were not 
-			disabled.  It is possible that the serial ISR has emptied the 
-			Tx queue, in which case we need to start the Tx off again
-			writing directly to the Tx register. */
-			if( ( sTHREEmpty == pdTRUE ) && ( xReturn == pdPASS ) )
+        }
+        else 
+        {
+			if( xQueueSend( xCharsForTx, &cOutChar, xBlockTime ) != pdPASS )
 			{
-				/* Get back the character we just posted. */
-				xQueueReceive( xCharsForTx, &cOutChar, serNO_BLOCK );
-				sTHREEmpty = pdFALSE;
-				UART_BUF = cOutChar;
+				xReturn = pdFAIL;
+			}			
+			else
+			{
+				xReturn = pdPASS;				
 			}
-		}
+        }
+
+		xQueueEmpty = pdFALSE;
 	}
 	portEXIT_CRITICAL();
 
-	return pdPASS;
+	return xReturn;
 }
 /*-----------------------------------------------------------*/
 
@@ -202,7 +201,8 @@ portBASE_TYPE xHigherPriorityTaskWoken = pdFALSE;
 	characters. */
 	cChar = UART_BUF;
 
-	xQueueSendFromISR( xRxedChars, &cChar, &xHigherPriorityTaskWoken );
+    /* log_info("vRxISR : %c", cChar); */
+    xQueueSendFromISR( xRxedChars, &cChar, &xHigherPriorityTaskWoken );
 
 	if( xHigherPriorityTaskWoken )
 	{
@@ -227,13 +227,15 @@ portBASE_TYPE xTaskWoken = pdFALSE;
 
 	if( xQueueReceiveFromISR( xCharsForTx, &cChar, &xTaskWoken ) == pdTRUE )
 	{
+        /* log_info("vTxISR : %x", cChar); */
 		/* There was another character queued - transmit it now. */
 		UART_BUF = cChar;
+        __asm__ volatile("csync");
 	}
 	else
 	{
 		/* There were no other characters to transmit. */
-		sTHREEmpty = pdTRUE;
+		xQueueEmpty = pdTRUE;
 	}
 }
 

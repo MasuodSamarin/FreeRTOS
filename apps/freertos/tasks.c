@@ -1263,7 +1263,7 @@ static void prvAddNewTaskToReadyList( TCB_t *pxNewTCB )
 			/* Generate the tick time at which the task wants to wake. */
 			xTimeToWake = *pxPreviousWakeTime + xTimeIncrement;
 
-            log_error("xTimeToWake : 0x%x / pxPreviousWakeTime : 0x%x / xConstTickCount : 0x%x", xTimeToWake, *pxPreviousWakeTime, xConstTickCount );
+            /* log_error("xTimeToWake : 0x%x / pxPreviousWakeTime : 0x%x / xConstTickCount : 0x%x", xTimeToWake, *pxPreviousWakeTime, xConstTickCount ); */
 			if( xConstTickCount < *pxPreviousWakeTime )
 			{
 				/* The tick count has overflowed since this function was
@@ -1317,9 +1317,7 @@ static void prvAddNewTaskToReadyList( TCB_t *pxNewTCB )
 		have put ourselves to sleep. */
 		if( xAlreadyYielded == pdFALSE )
 		{
-            log_error("portYIELD_WITHIN_API - pre");
 			portYIELD_WITHIN_API();
-            log_error("portYIELD_WITHIN_API - post");
 		}
 		else
 		{
@@ -3284,7 +3282,7 @@ static portTASK_FUNCTION( prvIdleTask, pvParameters )
 
 	for( ;; )
 	{
-        /* log_info("prvIdleTask - run"); */
+        /* log_error("prvIdleTask - run"); */
 		/* See if any tasks have deleted themselves - if so then the idle task
 		is responsible for freeing the deleted task's TCB and stack. */
 		prvCheckTasksWaitingTermination();
