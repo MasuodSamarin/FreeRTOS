@@ -23,19 +23,18 @@ cpu/$(RELEASE)/debug_init.c \
 cpu/$(RELEASE)/sys_init.c \
 cpu/$(RELEASE)/uart_hw.c \
 cpu/$(RELEASE)/timer_hw.c \
-serial/serial.c \
-ParTest/ParTest.c \
-main.c
 
 # Setup paths to source code	
-export SOURCE_PATH 	= freertos
-export PORT_PATH 	= freertos/portable/pi32_lto/$(RELEASE)
-export DEMO_PATH 	= freertos/Common/Minimal
+export SOURCE_PATH 	= freertos/Source
+export PORT_PATH 	= freertos/Source/portable/pi32_lto/$(RELEASE)
+export DEMO_PATH 	= freertos/Demo/Common/Minimal
+export LOCAL_PATH 	= freertos/Demo/${RELEASE}
 
 INCLUDES += \
--Ifreertos/include \
--Ifreertos/portable/pi32_lto/$(RELEASE) \
--Ifreertos/Common/include \
+-Ifreertos/Source/include \
+-Ifreertos/Source/portable/pi32_lto/$(RELEASE) \
+-Ifreertos/Demo/Common/include \
+-Ifreertos/Demo/${RELEASE} \
 
 # Add core code for FreeRTOS base
 SRCS_C += \
@@ -48,6 +47,9 @@ $(DEMO_PATH)/integer.c \
 $(DEMO_PATH)/comtest.c \
 $(DEMO_PATH)/PollQ.c \
 $(PORT_PATH)/port.c \
+$(LOCAL_PATH)/serial/serial.c \
+$(LOCAL_PATH)/ParTest/ParTest.c \
+$(LOCAL_PATH)/main.c
 # $(PORT_PATH)/portISR.c \
 
 
